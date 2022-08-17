@@ -1,0 +1,23 @@
+{
+    "name": "eslint-config-e7npm",
+    "version": "0.0.1",
+	"packageManager": "yarn@3.2.2",
+    "peerDependencies": {
+        "@typescript-eslint/eslint-plugin": ">= 5",
+        "@typescript-eslint/parser": ">= 5",
+        "eslint": ">= 8",
+        "eslint-config-airbnb-typescript": ">= 17",
+        "eslint-config-prettier": ">= 8",
+        "eslint-plugin-import": ">= 2",
+        "eslint-plugin-jsx-a11y": ">= 6",
+        "eslint-plugin-prettier": ">= 4",
+        "eslint-plugin-react": ">= 7",
+        "eslint-plugin-react-hooks": ">= 4",
+        "npm-run-all": ">= 4",
+        "prettier": ">= 2",
+        "typescript": ">= 4"
+    },
+    "files": [
+        "index.js"
+      ]
+}
