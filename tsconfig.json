@@ -1,24 +1,19 @@
 {
-    "compilerOptions": {
-      "noImplicitAny": true,
-      "strict": false,
-      "noImplicitUseStrict": true,
-      "checkJs": false,
-      "sourceMap": false,
-      "allowJs": true,
-      "isolatedModules": true,
-      "target": "ES6",
-      "moduleResolution": "node",
-      "skipLibCheck": true,
-      "preserveConstEnums": true,
-      "esModuleInterop": true,
-      "strictNullChecks": true
-    },
-    "include": [
-      "*.js",
-      "*.json"
-    ],
-    "exclude": [
-      "node_modules"
-    ]
-  }
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "strict": false,
+    "noImplicitUseStrict": true,
+    "checkJs": false,
+    "sourceMap": false,
+    "allowJs": true,
+    "isolatedModules": true,
+    "target": "ES6",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "preserveConstEnums": true,
+    "esModuleInterop": true,
+    "strictNullChecks": true
+  },
+  "include": ["*.js", "*.json"],
+  "exclude": ["node_modules"]
+}
