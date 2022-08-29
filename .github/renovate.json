@@ -1,0 +1,8 @@
+{
+  "labels": [
+    "eslint-config-e7npm"
+  ],
+  "extends": [
+    "github>andreigec/renovate"
+  ]
+}

@@ -3,7 +3,7 @@
   "version": "0.0.5",
   "packageManager": "yarn@3.2.2",
   "scripts": {
-    "format": "npx eslint *.js --fix"
+    "lint": "npx eslint *.js --fix"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": ">= 5",
