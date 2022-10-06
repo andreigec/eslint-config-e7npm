@@ -1,7 +1,7 @@
 {
   "name": "eslint-config-e7npm",
   "version": "0.0.5",
-  "packageManager": "yarn@3.2.3",
+  "packageManager": "yarn@3.2.4",
   "scripts": {
     "lint": "npx eslint *.js --fix"
   },
