@@ -4,5 +4,6 @@
   ],
   "extends": [
     "github>andreigec/renovate"
-  ]
+  ],
+  "rangeStrategy": "replace"
 }
