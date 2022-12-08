@@ -11,6 +11,7 @@
     "eslint": ">= 8",
     "eslint-config-airbnb-typescript": ">= 17",
     "eslint-config-prettier": ">= 8",
+    "eslint-import-resolver-typescript": ">= 3",
     "eslint-plugin-import": ">= 2",
     "eslint-plugin-jsx-a11y": ">= 6",
     "eslint-plugin-prettier": ">= 4",
