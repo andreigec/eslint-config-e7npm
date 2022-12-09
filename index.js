@@ -34,6 +34,7 @@ module.exports = {
     'prettier',
     'jsx-a11y',
     'import',
+    'simple-import-sort',
   ],
   extends: [
     'eslint:recommended',
@@ -68,7 +69,7 @@ module.exports = {
     'no-restricted-globals': 'off',
     'no-undef': 'off',
     'padding-line-between-statements': [
-      'error',
+      'off',
       { blankLine: 'never', prev: ['import'], next: ['import'] },
       {
         blankLine: 'never',
@@ -114,5 +115,9 @@ module.exports = {
     'react/no-unused-prop-types': 'off',
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+    'import/first': 'error',
+    'import/newline-after-import': 'error',
   },
 };

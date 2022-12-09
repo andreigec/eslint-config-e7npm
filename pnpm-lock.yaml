@@ -15,6 +15,7 @@ importers:
       eslint-plugin-prettier: '>= 4'
       eslint-plugin-react: '>= 7'
       eslint-plugin-react-hooks: '>= 4'
+      eslint-plugin-simple-import-sort: '>=8'
       prettier: '>= 2'
       typescript: '>= 4'
     dependencies:
@@ -29,6 +30,7 @@ importers:
       eslint-plugin-prettier: 4.2.1_pgxuib4rd7wiymfktharf5ydt4
       eslint-plugin-react: 7.31.10_eslint@8.28.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.28.0
+      eslint-plugin-simple-import-sort: 8.0.0_eslint@8.28.0
       prettier: 2.7.1
       typescript: 4.9.3
 
@@ -763,6 +765,14 @@ packages:
       resolve: 2.0.0-next.4
       semver: 6.3.0
       string.prototype.matchall: 4.0.8
+    dev: false
+
+  /eslint-plugin-simple-import-sort/8.0.0_eslint@8.28.0:
+    resolution: {integrity: sha512-bXgJQ+lqhtQBCuWY/FUWdB27j4+lqcvXv5rUARkzbeWLwea+S5eBZEQrhnO+WgX3ZoJHVj0cn943iyXwByHHQw==}
+    peerDependencies:
+      eslint: '>=5.0.0'
+    dependencies:
+      eslint: 8.28.0
     dev: false
 
   /eslint-scope/5.1.1:
