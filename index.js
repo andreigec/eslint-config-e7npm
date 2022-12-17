@@ -16,7 +16,7 @@ module.exports = {
         project: ['packages/*/tsconfig.json', './tsconfig.json'],
       },
       node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        extensions: ['.mjs', '.json', '.js', '.jsx', '.ts', '.tsx', '.d.ts'],
       },
     },
   },
@@ -39,7 +39,6 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
-    'airbnb-typescript',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'plugin:jsx-a11y/recommended',
