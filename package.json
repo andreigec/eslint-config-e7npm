@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-e7npm",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "lint": "npx eslint *.js --fix"
@@ -16,9 +16,9 @@
     "eslint-plugin-prettier": ">= 4",
     "eslint-plugin-react": ">= 7",
     "eslint-plugin-react-hooks": ">= 4",
-    "eslint-plugin-simple-import-sort": ">=8",
+    "eslint-plugin-simple-import-sort": ">=10",
     "prettier": ">= 2",
-    "typescript": ">= 4"
+    "typescript": ">= 5"
   },
   "files": [
     "index.js"
