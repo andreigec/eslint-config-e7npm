@@ -2,7 +2,6 @@
   "compilerOptions": {
     "noImplicitAny": true,
     "strict": false,
-    "noImplicitUseStrict": true,
     "checkJs": false,
     "sourceMap": false,
     "allowJs": true,
