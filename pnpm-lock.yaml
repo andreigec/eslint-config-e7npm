@@ -1,34 +1,36 @@
 lockfileVersion: 5.4
 
-specifiers:
-  '@typescript-eslint/eslint-plugin': '>= 5'
-  '@typescript-eslint/parser': '>= 5'
-  eslint: '>= 8'
-  eslint-config-prettier: '>= 8'
-  eslint-import-resolver-typescript: '>= 3'
-  eslint-plugin-import: '>= 2'
-  eslint-plugin-jsx-a11y: '>= 6'
-  eslint-plugin-prettier: '>= 4'
-  eslint-plugin-react: '>= 7'
-  eslint-plugin-react-hooks: '>= 4'
-  eslint-plugin-simple-import-sort: '>=10'
-  prettier: '>= 2'
-  typescript: '>= 5'
+importers:
 
-dependencies:
-  '@typescript-eslint/eslint-plugin': 5.43.0_k73f4uudqgyl7lroajal3v6qxq
-  '@typescript-eslint/parser': 5.43.0_c3s5twac2s6plwjjm5iitobq3m
-  eslint: 8.28.0
-  eslint-config-prettier: 8.5.0_eslint@8.28.0
-  eslint-import-resolver-typescript: 3.5.2_ktrec6dplf4now6nlbc6d67jee
-  eslint-plugin-import: 2.26.0_d5vn4nsvkp5ugznurcfxmdkaeu
-  eslint-plugin-jsx-a11y: 6.6.1_eslint@8.28.0
-  eslint-plugin-prettier: 4.2.1_pgxuib4rd7wiymfktharf5ydt4
-  eslint-plugin-react: 7.31.10_eslint@8.28.0
-  eslint-plugin-react-hooks: 4.6.0_eslint@8.28.0
-  eslint-plugin-simple-import-sort: 10.0.0_eslint@8.28.0
-  prettier: 2.7.1
-  typescript: 5.0.2
+  .:
+    specifiers:
+      '@typescript-eslint/eslint-plugin': '>= 5'
+      '@typescript-eslint/parser': '>= 5'
+      eslint: '>= 8'
+      eslint-config-prettier: '>= 8'
+      eslint-import-resolver-typescript: '>= 3'
+      eslint-plugin-import: '>= 2'
+      eslint-plugin-jsx-a11y: '>= 6'
+      eslint-plugin-prettier: '>= 4'
+      eslint-plugin-react: '>= 7'
+      eslint-plugin-react-hooks: '>= 4'
+      eslint-plugin-simple-import-sort: '>=10'
+      prettier: '>= 2'
+      typescript: '>= 5'
+    dependencies:
+      '@typescript-eslint/eslint-plugin': 5.43.0_k73f4uudqgyl7lroajal3v6qxq
+      '@typescript-eslint/parser': 5.43.0_c3s5twac2s6plwjjm5iitobq3m
+      eslint: 8.28.0
+      eslint-config-prettier: 8.5.0_eslint@8.28.0
+      eslint-import-resolver-typescript: 3.5.2_ktrec6dplf4now6nlbc6d67jee
+      eslint-plugin-import: 2.26.0_d5vn4nsvkp5ugznurcfxmdkaeu
+      eslint-plugin-jsx-a11y: 6.6.1_eslint@8.28.0
+      eslint-plugin-prettier: 4.2.1_pgxuib4rd7wiymfktharf5ydt4
+      eslint-plugin-react: 7.31.10_eslint@8.28.0
+      eslint-plugin-react-hooks: 4.6.0_eslint@8.28.0
+      eslint-plugin-simple-import-sort: 10.0.0_eslint@8.28.0
+      prettier: 2.7.1
+      typescript: 5.0.2
 
 packages:
 
