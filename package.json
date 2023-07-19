@@ -1,26 +1,27 @@
 {
-  "name": "eslint-config-e7npm",
-  "version": "0.0.10",
-  "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "lint": "npx eslint *.js --fix"
-  },
-  "dependencies":{
-     "@typescript-eslint/eslint-plugin":">=6",
-     "@typescript-eslint/parser":">=6",
-     "eslint":">=8",
-     "eslint-config-prettier":">=8",
-     "eslint-import-resolver-typescript":">=3",
-     "eslint-plugin-import":">=2",
-     "eslint-plugin-jsx-a11y":">=6",
-     "eslint-plugin-prettier":">=5",
-     "eslint-plugin-react":">=7",
-     "eslint-plugin-react-hooks":">=4",
-     "eslint-plugin-simple-import-sort":">=10",
-     "prettier":">=3",
-     "typescript":">=5"
-  },
-  "files":[
-     "index.js"
-  ]
+   "name": "eslint-config-e7npm",
+   "version": "0.0.11",
+   "scripts": {
+      "preinstall": "npx only-allow pnpm",
+      "lint": "npx eslint *.js --fix"
+   },
+   "dependencies": {
+      "@typescript-eslint/eslint-plugin": ">=6",
+      "@typescript-eslint/parser": ">=6",
+      "eslint": ">=8",
+      "eslint-config-prettier": ">=8",
+      "eslint-import-resolver-typescript": ">=3",
+      "eslint-plugin-import": ">=2",
+      "eslint-plugin-jsx-a11y": ">=6",
+      "eslint-plugin-prettier": ">=5",
+      "eslint-plugin-react": ">=7",
+      "eslint-plugin-react-hooks": ">=4",
+      "eslint-plugin-simple-import-sort": ">=10",
+      "eslint-utils": ">=3",
+      "prettier": ">=3",
+      "typescript": ">=5"
+   },
+   "files": [
+      "index.js"
+   ]
 }
