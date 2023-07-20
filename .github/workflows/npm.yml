@@ -1,13 +1,14 @@
-name: PR
+name: npm
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
-on: [pull_request]
-
+on:
+  push:
+    branches: [ main ]
 jobs:
-  PR:
+  npm:
     runs-on: ubuntu-latest
-    name: lint
+
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -44,6 +45,19 @@ jobs:
     - name: lint
       run: |
         pnpm -w run lint
+
+    - uses:  'phips28/gh-action-bump-version@master'
+      name:  'Automated Version Bump'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      with:
+        commit-message: 'CI: bumps version to {{version}} [skip ci]'
+
+    - name: Set Auth Token
+      run: npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+
+    - name: Publish
+      run: pnpm publish --no-git-checks
 
     - name: notify analytica of build
       uses: andreigecanalytica/analytica.click.gh@2

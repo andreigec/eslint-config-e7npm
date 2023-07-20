@@ -11,8 +11,9 @@
     "skipLibCheck": true,
     "preserveConstEnums": true,
     "esModuleInterop": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "outDir": "dist"
   },
-  "include": ["*.js", "*.json"],
+  "include": ["**/.eslintrc.js", "*.js", "**/*.json"],
   "exclude": ["node_modules"]
 }

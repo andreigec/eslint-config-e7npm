@@ -1,10 +1,12 @@
-module.exports = {
+/** @type {import('eslint').Linter.Config} */
+var config = {
   root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: 'tsconfig.json',
     ecmaVersion: 6,
     createDefaultProgram: true,
+    extraFileExtensions: ['.json'],
   },
   settings: {
     react: {
@@ -120,3 +122,4 @@ module.exports = {
     'import/newline-after-import': 'error',
   },
 };
+module.exports = config;
