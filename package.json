@@ -1,26 +1,26 @@
 {
   "name": "eslint-config-e7npm",
-  "version": "0.0.14",
+  "version": "0.0.13",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "lint": "eslint --ext .js,.json .",
     "format": "eslint --ext .js,.json . --fix"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^6",
-    "@typescript-eslint/parser": ">=6",
-    "eslint": "^8",
-    "eslint-config-prettier": "^8",
-    "eslint-import-resolver-typescript": "^3",
-    "eslint-plugin-import": "^2",
-    "eslint-plugin-jsx-a11y": "^6",
-    "eslint-plugin-prettier": "^5",
-    "eslint-plugin-react": "^7",
-    "eslint-plugin-react-hooks": "^4",
-    "eslint-plugin-simple-import-sort": "^10",
-    "eslint-utils": "^3",
-    "prettier": "^3",
-    "typescript": "^5"
+    "@typescript-eslint/eslint-plugin": "6.2.0",
+    "@typescript-eslint/parser": "6.2.0",
+    "eslint": "8.46.0",
+    "eslint-config-prettier": "8.9.0",
+    "eslint-import-resolver-typescript": "3.5.5",
+    "eslint-plugin-import": "2.28.0",
+    "eslint-plugin-jsx-a11y": "6.7.1",
+    "eslint-plugin-prettier": "5.0.0",
+    "eslint-plugin-react": "7.33.1",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-simple-import-sort": "10.0.0",
+    "eslint-utils": "3.0.0",
+    "prettier": "3.0.0",
+    "typescript": "5.1.6"
   },
   "files": [
     "index.js"

@@ -6,13 +6,5 @@
   "extends": [
     "github>andreigec/renovate"
   ],
-  "rangeStrategy": "replace",
-  "lockFileMaintenance": {
-    "enabled": true,
-    "recreateWhen": "always",
-    "rebaseStalePrs": true,
-    "schedule": [
-      "every 2 weeks on monday"
-    ]
-  }
+  "rangeStrategy": "replace"
 }
