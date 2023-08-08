@@ -60,6 +60,7 @@ var config = {
     '@typescript-eslint/naming-convention': 'off',
     '@typescript-eslint/no-floating-promises': 'error',
     '@typescript-eslint/no-object-literal-type-assertion': 'off',
+    '@typescript-eslint/consistent-type-imports': 'error',
     'class-methods-use-this': 'off',
     'import/extensions': 'off',
     'import/prefer-default-export': 'off',
