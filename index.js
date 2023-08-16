@@ -23,12 +23,14 @@ var config = {
     },
   },
   ignorePatterns: [
-    'build/**/*',
-    'dist/**/*',
-    'node_modules/**/*',
-    'node_modules',
-    'cdk.out',
+    'build',
+    '**/build',
     'dist',
+    '**/dist',
+    'node_modules',
+    '**/node_modules',
+    'cdk.out',
+    '**/cdk.out',
   ],
   plugins: [
     'react-hooks',
@@ -49,8 +51,17 @@ var config = {
     'plugin:import/typescript',
   ],
   rules: {
+    '@typescript-eslint/array-type': [
+      'error',
+      {
+        default: 'array',
+      },
+    ],
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/consistent-type-definitions': 'off',
+    '@typescript-eslint/consistent-type-exports': 'error',
+    '@typescript-eslint/consistent-type-imports': 'error',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-member-accessibility': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -59,10 +70,30 @@ var config = {
     '@typescript-eslint/member-delimiter-style': 'off',
     '@typescript-eslint/naming-convention': 'off',
     '@typescript-eslint/no-floating-promises': 'error',
+    '@typescript-eslint/no-non-null-assertion': 'error',
     '@typescript-eslint/no-object-literal-type-assertion': 'off',
-    '@typescript-eslint/consistent-type-imports': 'error',
+    '@typescript-eslint/no-unused-expressions': 'warn',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        ignoreRestSiblings: true,
+      },
+    ],
+    '@typescript-eslint/non-nullable-type-assertion-style': 'off',
+    '@typescript-eslint/prefer-nullish-coalescing': [
+      'error',
+      {
+        ignorePrimitives: {
+          string: true,
+          boolean: true,
+        },
+      },
+    ],
     'class-methods-use-this': 'off',
     'import/extensions': 'off',
+    'import/first': 'error',
+    'import/newline-after-import': 'error',
     'import/prefer-default-export': 'off',
     'no-alert': 'error',
     'no-await-in-loop': 'off',
@@ -72,7 +103,11 @@ var config = {
     'no-undef': 'off',
     'padding-line-between-statements': [
       'off',
-      { blankLine: 'never', prev: ['import'], next: ['import'] },
+      {
+        blankLine: 'never',
+        prev: ['import'],
+        next: ['import'],
+      },
       {
         blankLine: 'never',
         prev: ['expression'],
@@ -103,10 +138,24 @@ var config = {
         prev: ['block-like'],
         next: ['const', 'let', 'var', 'block-like'],
       },
-      { blankLine: 'always', prev: ['if'], next: ['if', 'expression'] },
-      { blankLine: 'always', prev: ['*'], next: ['case', 'default'] },
+      {
+        blankLine: 'always',
+        prev: ['if'],
+        next: ['if', 'expression'],
+      },
+      {
+        blankLine: 'always',
+        prev: ['*'],
+        next: ['case', 'default'],
+      },
     ],
-    'prettier/prettier': ['error', { singleQuote: true, trailingComma: 'all' }],
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true,
+        trailingComma: 'all',
+      },
+    ],
     'react-hooks/exhaustive-deps': 'warn',
     'react-hooks/rules-of-hooks': 'error',
     'react/display-name': 'off',
@@ -117,10 +166,8 @@ var config = {
     'react/no-unused-prop-types': 'off',
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
-    'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
-    'import/first': 'error',
-    'import/newline-after-import': 'error',
+    'simple-import-sort/imports': 'error',
   },
 };
 module.exports = config;
