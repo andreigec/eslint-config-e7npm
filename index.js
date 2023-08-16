@@ -82,12 +82,13 @@ var config = {
     ],
     '@typescript-eslint/non-nullable-type-assertion-style': 'off',
     '@typescript-eslint/prefer-nullish-coalescing': [
-      'error',
+      'warn',
       {
         ignorePrimitives: {
           string: true,
           boolean: true,
         },
+        ignoreMixedLogicalExpressions: true,
       },
     ],
     'class-methods-use-this': 'off',
