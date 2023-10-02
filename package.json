@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-e7npm",
-  "version": "0.0.40",
+  "version": "0.0.41",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "lint": "eslint --ext .js,.json .",
