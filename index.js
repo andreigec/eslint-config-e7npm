@@ -163,6 +163,8 @@ var config = {
     'react/jsx-curly-newline': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-wrap-multilines': 'off',
+    'react/jsx-uses-react': 'on',
+    'react/react-in-jsx-scope': 'off',
     'react/no-array-index-key': 'error',
     'react/no-unused-prop-types': 'off',
     'react/prop-types': 'off',
