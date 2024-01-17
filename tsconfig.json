@@ -12,8 +12,8 @@
     "preserveConstEnums": true,
     "esModuleInterop": true,
     "strictNullChecks": true,
-    "outDir": "dist"
+    "outDir": "dist",
   },
   "include": ["**/.eslintrc.js", "*.js", "**/*.json"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }
