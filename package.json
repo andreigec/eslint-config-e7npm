@@ -3,8 +3,10 @@
   "version": "0.0.86",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "lint": "eslint --ext .js,.json .",
-    "format": "eslint --ext .js,.json . --fix"
+    "format": "eslint --ext .ts,.tsx,.js,.json . --fix",
+    "lint:tsc": "tsc --noEmit",
+    "lint:eslint": "eslint --ext .ts,.tsx,.js,.json .",
+    "lint": "pnpm run /^lint:/"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "7.0.2",
