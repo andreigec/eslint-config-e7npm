@@ -72,6 +72,7 @@ var config = {
     '@typescript-eslint/no-floating-promises': 'error',
     '@typescript-eslint/no-non-null-assertion': 'error',
     '@typescript-eslint/no-object-literal-type-assertion': 'off',
+    '@typescript-eslint/no-unnecessary-condition': 'warn',
     '@typescript-eslint/no-unused-expressions': 'warn',
     '@typescript-eslint/no-unused-vars': [
       'warn',
