@@ -3,9 +3,9 @@
   "version": "0.0.87",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "format": "eslint --ext .ts,.tsx . --fix",
+    "format": "eslint --ext .js . --fix",
     "lint:tsc": "tsc --noEmit",
-    "lint:eslint": "eslint --ext .ts,.tsx .",
+    "lint:eslint": "eslint --ext .js .",
     "lint": "pnpm run /^lint:/"
   },
   "dependencies": {
