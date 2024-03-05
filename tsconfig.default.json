@@ -12,7 +12,6 @@
     "preserveConstEnums": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "noUncheckedIndexedAccess": true,
     "strictNullChecks": true,
     "resolveJsonModule": true,
     "incremental": true,
