@@ -3,9 +3,9 @@
   "version": "0.0.89",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "format": "eslint --ext .js . --fix",
+    "format": "eslint --ext index.js,.json . --fix",
     "lint:tsc": "tsc --noEmit",
-    "lint:eslint": "eslint --ext .js .",
+    "lint:eslint": "eslint --ext index.js,.json .",
     "lint": "pnpm run /^lint:/"
   },
   "dependencies": {
@@ -25,6 +25,7 @@
     "typescript": "5.3.3"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "tsconfig.default.json"
   ]
 }

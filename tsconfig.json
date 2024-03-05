@@ -1,19 +1,5 @@
 {
-  "compilerOptions": {
-    "noImplicitAny": true,
-    "strict": false,
-    "checkJs": false,
-    "sourceMap": false,
-    "allowJs": true,
-    "isolatedModules": true,
-    "target": "ES6",
-    "moduleResolution": "node",
-    "skipLibCheck": true,
-    "preserveConstEnums": true,
-    "esModuleInterop": true,
-    "strictNullChecks": true,
-    "outDir": "dist"
-  },
-  "include": ["**/.eslintrc.js", "*.js", "**/*.json"],
-  "exclude": ["node_modules"]
+  "extends": "./tsconfig.default.json",
+  "include": ["*.json", "index.js"],
+  "exclude": ["node_modules", "**/node_modules/**"]
 }
