@@ -97,6 +97,7 @@ var config = {
     'import/first': 'error',
     'import/newline-after-import': 'error',
     'import/prefer-default-export': 'off',
+    'object-shorthand': 'error',
     'no-alert': 'error',
     'no-await-in-loop': 'off',
     'no-console': 'warn',
