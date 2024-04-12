@@ -92,6 +92,7 @@ var config = {
         ignoreMixedLogicalExpressions: true,
       },
     ],
+    '@typescript-eslint/switch-exhaustiveness-check': 'error',
     'class-methods-use-this': 'off',
     'import/extensions': 'off',
     'import/first': 'error',
