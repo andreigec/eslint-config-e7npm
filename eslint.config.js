@@ -2,6 +2,7 @@ const js = require('@eslint/js');
 const typescript = require('@typescript-eslint/eslint-plugin');
 const parser = require('@typescript-eslint/parser');
 const globals = require('globals');
+const nextPlugin = require('@next/eslint-plugin-next');
 
 /** @type {Array<import('eslint').Flat.Config>} */
 const baseConfig = [
@@ -33,6 +34,9 @@ const baseConfig = [
         ...globals.browser,
         ...globals.es2021,
         ...globals.node,
+        React: true,
+        JSX: true,
+        NodeJS: true
       },
     },
     plugins: {
@@ -43,6 +47,7 @@ const baseConfig = [
       'jsx-a11y': require('eslint-plugin-jsx-a11y'),
       'import': require('eslint-plugin-import'),
       'simple-import-sort': require('eslint-plugin-simple-import-sort'),
+      '@next/next': nextPlugin,
     },
     settings: {
       react: {
@@ -84,7 +89,8 @@ const baseConfig = [
       'import/first': 'error',
       'import/newline-after-import': 'error',
       'import/prefer-default-export': 'off',
-      'react/jsx-uses-react': 'error',
+      'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-react': 'off',
       'react/no-array-index-key': 'error',
       'react-hooks/exhaustive-deps': 'warn',
       'react-hooks/rules-of-hooks': 'error',
