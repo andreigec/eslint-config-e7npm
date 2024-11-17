@@ -29,12 +29,12 @@ const baseConfig = [
       parser: parser,
       parserOptions: {
         project: './tsconfig.json',
-        ecmaVersion: 2015,
+        ecmaVersion: 2021,
         sourceType: 'module',
       },
       globals: {
         ...globals.browser,
-        ...globals.es2015,
+        ...globals.es2021,
         ...globals.node,
       },
     },
@@ -80,14 +80,8 @@ const baseConfig = [
       '@typescript-eslint/no-non-null-assertion': 'error',
       '@typescript-eslint/no-object-literal-type-assertion': 'off',
       '@typescript-eslint/no-unnecessary-condition': 'warn',
-      //'@typescript-eslint/no-unused-expressions': 'warn',
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        {
-          argsIgnorePattern: '^_',
-          ignoreRestSiblings: true,
-        },
-      ],
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": ["error"],
       '@typescript-eslint/non-nullable-type-assertion-style': 'off',
       '@typescript-eslint/prefer-nullish-coalescing': [
         'warn',
@@ -175,29 +169,19 @@ const baseConfig = [
       'simple-import-sort': require('eslint-plugin-simple-import-sort'),
     },
     languageOptions: {
-      ecmaVersion: 2015,
+      ecmaVersion: 2021,
       sourceType: 'module',
-     
+
       globals: {
         ...globals.browser,
-        ...globals.es2015,
+        ...globals.es2021,
+
         ...globals.node,
       },
     },
   },
 
-  // Config for the config file itself
-  {
-    files: ['eslint.config.js'],
-    ...js.configs.recommended,
-    languageOptions: {
-      ecmaVersion: 2015,
-      sourceType: 'commonjs',
-      globals: {
-        ...globals.node,
-      },
-    },
-  },
+
 ];
 
 module.exports = baseConfig;

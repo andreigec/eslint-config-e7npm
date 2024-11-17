@@ -1,3 +1,5 @@
 node_modules/
 
 /packages/ui/public/browser-widget.js
+
+/tsconfig.tsbuildinfo

@@ -3,9 +3,9 @@
   "version": "0.1.1",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "format": "eslint --ext eslint.config.js,.json . --fix",
+    "format": "eslint . --fix",
     "lint:tsc": "tsc --noEmit",
-    "lint:eslint": "eslint --ext eslint.config.js,.json .",
+    "lint:eslint": "eslint .",
     "lint": "pnpm run /^lint:/"
   },
   "dependencies": {
