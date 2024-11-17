@@ -5,7 +5,6 @@ const globals = require('globals');
 
 /** @type {Array<import('eslint').Flat.Config>} */
 const baseConfig = [
-  // Ignore patterns
   {
     ignores: [
       'build/**',
@@ -19,10 +18,8 @@ const baseConfig = [
     ],
   },
 
-  // Base JS config
-  js.configs.recommended,
+   js.configs.recommended,
 
-  // Config for TypeScript files
   {
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
@@ -62,27 +59,15 @@ const baseConfig = [
       },
     },
     rules: {
-      // TypeScript rules
-      '@typescript-eslint/array-type': ['error', { default: 'array' }],
       '@typescript-eslint/ban-ts-comment': 'off',
-      '@typescript-eslint/ban-ts-ignore': 'off',
-      '@typescript-eslint/consistent-type-definitions': 'off',
       '@typescript-eslint/consistent-type-exports': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/explicit-member-accessibility': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/indent': 'off',
-      '@typescript-eslint/interface-name-prefix': 'off',
-      '@typescript-eslint/member-delimiter-style': 'off',
-      '@typescript-eslint/naming-convention': 'off',
       '@typescript-eslint/no-floating-promises': 'error',
-      '@typescript-eslint/no-non-null-assertion': 'error',
-      '@typescript-eslint/no-object-literal-type-assertion': 'off',
       '@typescript-eslint/no-unnecessary-condition': 'warn',
-      "no-unused-vars": "off",
-      "@typescript-eslint/no-unused-vars": ["error"],
-      '@typescript-eslint/non-nullable-type-assertion-style': 'off',
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': ['error'],
       '@typescript-eslint/prefer-nullish-coalescing': [
         'warn',
         {
@@ -94,44 +79,17 @@ const baseConfig = [
         },
       ],
       '@typescript-eslint/switch-exhaustiveness-check': 'error',
-
-      // Core ESLint rules
-      'class-methods-use-this': 'off',
-      'object-shorthand': 'error',
-      'no-alert': 'error',
-      'no-await-in-loop': 'off',
       'no-console': 'warn',
-      'no-mixed-operators': 'off',
-      'no-restricted-globals': 'off',
-      'no-undef': 'off',
-
-      // Import rules
-      'import/extensions': 'off',
+      'object-shorthand': 'error',
       'import/first': 'error',
       'import/newline-after-import': 'error',
       'import/prefer-default-export': 'off',
-
-      // React rules
-      'react/display-name': 'off',
-      'react/jsx-curly-newline': 'off',
-      'react/jsx-props-no-spreading': 'off',
-      'react/jsx-wrap-multilines': 'off',
       'react/jsx-uses-react': 'error',
-      'react/react-in-jsx-scope': 'off',
       'react/no-array-index-key': 'error',
-      'react/no-unused-prop-types': 'off',
-      'react/prop-types': 'off',
-      'react/require-default-props': 'off',
-
-      // React Hooks rules
       'react-hooks/exhaustive-deps': 'warn',
       'react-hooks/rules-of-hooks': 'error',
-
-      // Simple Import Sort rules
       'simple-import-sort/exports': 'error',
       'simple-import-sort/imports': 'error',
-
-      // Prettier rules
       'prettier/prettier': [
         'error',
         {
@@ -139,8 +97,6 @@ const baseConfig = [
           trailingComma: 'all',
         },
       ],
-
-      // Padding line between statements
       'padding-line-between-statements': [
         'off',
         { blankLine: 'never', prev: ['import'], next: ['import'] },
@@ -156,7 +112,6 @@ const baseConfig = [
     },
   },
 
-  // Config for JavaScript files
   {
     files: ['**/*.js', '**/*.jsx'],
     ...js.configs.recommended,
@@ -171,17 +126,13 @@ const baseConfig = [
     languageOptions: {
       ecmaVersion: 2021,
       sourceType: 'module',
-
       globals: {
         ...globals.browser,
         ...globals.es2021,
-
         ...globals.node,
       },
     },
   },
-
-
 ];
 
 module.exports = baseConfig;
