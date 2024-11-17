@@ -1,70 +1,40 @@
 {
-
 	"folders": [
 		{
 			"path": "."
 		}
 	],
-	
 	"settings": {
- 
-		"eslint.nodePath": ".yarn/sdks",
-		"prettier.prettierPath": ".yarn/sdks/prettier/index.js",
-		"typescript.tsdk": ".yarn/sdks/typescript/lib",
-		"typescript.enablePromptUseWorkspaceTsdk": true,
-		"search.exclude": {
-		  "**/.yarn": true,
-		  "**/.pnp.*": true
-		  },
+		"editor.bracketPairColorization.enabled": true,
+		"editor.guides.bracketPairs": "active",
 		"editor.codeActionsOnSave": {
 			"source.fixAll.eslint": "explicit"
 		},
+		"typescript.tsdk": "node_modules\\typescript\\lib",
 		"files.exclude": {
-		  "packages/ui/.cache": true,
-		  "packages/ui/.next": true,
-		  "packages/infra/build": true,
-		  "packages/infra/cdk.out": true,
-		  "**/.git": true,
-		  "**/.DS_Store": true,
-		  "**/node_modules": true,
-		  "**/dist": true,
-		  "node_modules": true
+			"dist": true,
+			"**/.git": true,
+			"**/.DS_Store": true,
+			"**/node_modules": true,
+			"node_modules": true
 		}
-	  },
+	},
 	  
 	"launch": {
 		"version": "0.2.0",
 		"configurations": [
 			{
-				"name": "server",
 				"type": "node-terminal",
+				"name": "Debug Current Test File (npm run test)",
 				"request": "launch",
-				"command": "npm run start",
-				"cwd": "${workspaceFolder}/packages/ui",
-			},
-			{
-				"name": "client",
-				"type": "pwa-chrome",
-				"request": "launch",
-				"url": "http://localhost:3000",
-				"cwd": "${workspaceFolder}/packages/ui",
-				"webRoot": "${workspaceFolder}/packages/ui",
-			},
-			//   {
-			// 	"type": "chrome",
-			// 	"request": "attach",
-			// 	"name": "Attach to Chrome",
-			// 	"port": 9222,
-			// 	"urlFilter": "http://localhost:3000/*",
-			// 	"webRoot": "${workspaceFolder}",
-			// 	"cwd": "${workspaceFolder}/packages/ui",
-			//   },
+				"command": "ts-node -- ${file}",
+				"cwd": "${fileDirname}"
+			  }
 		]
 	},"extensions": {
 		"recommendations": [
 		  "arcanis.vscode-zipfs",
-		  "dbaeumer.vscode-eslint",
-		  "esbenp.prettier-vscode"
+		  "dbaeumer.vscode-eslint"
 		]
 	  }
 	  

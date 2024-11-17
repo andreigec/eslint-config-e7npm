@@ -1,31 +1,34 @@
 {
   "name": "eslint-config-e7npm",
-  "version": "0.0.122",
+  "version": "0.1.1",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "format": "eslint --ext index.js,.json . --fix",
+    "format": "eslint --ext eslint.config.js,.json . --fix",
     "lint:tsc": "tsc --noEmit",
-    "lint:eslint": "eslint --ext index.js,.json .",
+    "lint:eslint": "eslint --ext eslint.config.js,.json .",
     "lint": "pnpm run /^lint:/"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "7.18.0",
-    "@typescript-eslint/parser": "7.18.0",
-    "eslint": "8.57.1",
     "eslint-config-prettier": "9.1.0",
     "eslint-import-resolver-typescript": "3.6.3",
-    "eslint-plugin-import": "2.31.0",
-    "eslint-plugin-jsx-a11y": "6.10.2",
-    "eslint-plugin-prettier": "5.2.1",
-    "eslint-plugin-react": "7.37.2",
-    "eslint-plugin-react-hooks": "4.6.2",
-    "eslint-plugin-simple-import-sort": "12.1.1",
     "eslint-utils": "3.0.0",
     "prettier": "3.3.3",
     "typescript": "5.6.3"
   },
   "files": [
-    "index.js",
+    "eslint.config.js",
     "tsconfig.default.json"
-  ]
+  ],
+  "exports": "./eslint.config.js",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "8.14.0",
+    "@typescript-eslint/parser": "8.14.0",
+    "eslint": "9.15.0",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "eslint-plugin-prettier": "5.2.1",
+    "eslint-plugin-react": "7.37.2",
+    "eslint-plugin-react-hooks": "5.0.0",
+    "eslint-plugin-simple-import-sort": "12.1.1"
+  }
 }

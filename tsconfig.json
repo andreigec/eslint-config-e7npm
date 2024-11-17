@@ -1,5 +1,17 @@
 {
   "extends": "./tsconfig.default.json",
-  "include": ["*.json", "index.js"],
-  "exclude": ["node_modules", "**/node_modules/**"]
+  "include": [
+    "*.json",
+    "*.js",
+    "*.ts",
+    "*.tsx",
+    "eslint.config.js",
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/node_modules/**",
+    "dist",
+    "build"
+  ]
 }
