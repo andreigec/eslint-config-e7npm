@@ -13,14 +13,7 @@
     "eslint-import-resolver-typescript": "3.6.3",
     "eslint-utils": "3.0.0",
     "prettier": "3.3.3",
-    "typescript": "5.7.2"
-  },
-  "files": [
-    "eslint.config.js",
-    "tsconfig.default.json"
-  ],
-  "exports": "./eslint.config.js",
-  "devDependencies": {
+    "typescript": "5.7.2",
     "@next/eslint-plugin-next": "^15.0.3",
     "@typescript-eslint/eslint-plugin": "8.15.0",
     "@typescript-eslint/parser": "8.15.0",
@@ -31,5 +24,10 @@
     "eslint-plugin-react": "7.37.2",
     "eslint-plugin-react-hooks": "5.0.0",
     "eslint-plugin-simple-import-sort": "12.1.1"
-  }
+  },
+  "files": [
+    "eslint.config.js",
+    "tsconfig.default.json"
+  ],
+  "exports": "./eslint.config.js"
 }
