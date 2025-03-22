@@ -1,8 +1,14 @@
-const js = require('@eslint/js');
-const typescript = require('@typescript-eslint/eslint-plugin');
-const parser = require('@typescript-eslint/parser');
-const globals = require('globals');
-const nextPlugin = require('@next/eslint-plugin-next');
+import js from '@eslint/js';
+import typescript from '@typescript-eslint/eslint-plugin';
+import parser from '@typescript-eslint/parser';
+import globals from 'globals';
+import nextPlugin from '@next/eslint-plugin-next';
+import reactPlugin from 'eslint-plugin-react';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import prettierPlugin from 'eslint-plugin-prettier';
+import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
+import importPlugin from 'eslint-plugin-import';
+import simpleImportSortPlugin from 'eslint-plugin-simple-import-sort';
 
 /** @type {Array<import('eslint').Flat.Config>} */
 const baseConfig = [
@@ -19,7 +25,7 @@ const baseConfig = [
     ],
   },
 
-   js.configs.recommended,
+  js.configs.recommended,
 
   {
     files: ['**/*.ts', '**/*.tsx'],
@@ -41,12 +47,12 @@ const baseConfig = [
     },
     plugins: {
       '@typescript-eslint': typescript,
-      'react': require('eslint-plugin-react'),
-      'react-hooks': require('eslint-plugin-react-hooks'),
-      'prettier': require('eslint-plugin-prettier'),
-      'jsx-a11y': require('eslint-plugin-jsx-a11y'),
-      'import': require('eslint-plugin-import'),
-      'simple-import-sort': require('eslint-plugin-simple-import-sort'),
+      'react': reactPlugin,
+      'react-hooks': reactHooksPlugin,
+      'prettier': prettierPlugin,
+      'jsx-a11y': jsxA11yPlugin,
+      'import': importPlugin,
+      'simple-import-sort': simpleImportSortPlugin,
       '@next/next': nextPlugin,
     },
     settings: {
@@ -75,7 +81,6 @@ const baseConfig = [
       'no-var': 'error',
       'prefer-const': 'error',
       'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0 }],
-      'no-duplicate-imports': 'error',
       'no-unused-expressions': 'error',
       'no-return-await': 'error',
       'no-await-in-loop': 'warn',
@@ -130,12 +135,12 @@ const baseConfig = [
     files: ['**/*.js', '**/*.jsx'],
     ...js.configs.recommended,
     plugins: {
-      'react': require('eslint-plugin-react'),
-      'react-hooks': require('eslint-plugin-react-hooks'),
-      'prettier': require('eslint-plugin-prettier'),
-      'jsx-a11y': require('eslint-plugin-jsx-a11y'),
-      'import': require('eslint-plugin-import'),
-      'simple-import-sort': require('eslint-plugin-simple-import-sort'),
+      'react': reactPlugin,
+      'react-hooks': reactHooksPlugin,
+      'prettier': prettierPlugin,
+      'jsx-a11y': jsxA11yPlugin,
+      'import': importPlugin,
+      'simple-import-sort': simpleImportSortPlugin,
     },
     languageOptions: {
       ecmaVersion: 2021,
@@ -149,4 +154,4 @@ const baseConfig = [
   },
 ];
 
-module.exports = baseConfig;
+export default baseConfig;
