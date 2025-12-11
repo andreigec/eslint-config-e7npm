@@ -5,6 +5,11 @@ concurrency:
 on:
   push:
     branches: [ main ]
+
+permissions:
+  contents: write
+  id-token: write
+
 jobs:
   npm:
     runs-on: ubuntu-latest
@@ -16,14 +21,14 @@ jobs:
     - name: Install Node.js
       uses: actions/setup-node@v6
       with:
-        node-version: 24
+        node-version: lts/*
+        registry-url: https://registry.npmjs.org
 
     - uses: pnpm/action-setup@v4
       name: Install pnpm
       id: pnpm-install
       with:
         version: 10
-        run_install: false
 
     - name: Get pnpm store directory
       id: pnpm-cache
@@ -49,15 +54,12 @@ jobs:
     - uses:  'phips28/gh-action-bump-version@master'
       name:  'Automated Version Bump'
       env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         commit-message: 'CI: bumps version to {{version}} [skip ci]'
 
-    - name: Set Auth Token
-      run: npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
-
     - name: Publish
-      run: pnpm publish --no-git-checks
+      run: pnpm publish
 
     - name: notify analytica of build
       if: always()
