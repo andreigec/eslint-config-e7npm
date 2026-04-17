@@ -13,21 +13,21 @@
     "lint": "pnpm run /^lint:/"
   },
   "dependencies": {
-    "@next/eslint-plugin-next": "^15.2.3",
-    "@typescript-eslint/eslint-plugin": "^8.27.0",
-    "@typescript-eslint/parser": "^8.27.0",
-    "eslint": "^9.23.0",
-    "eslint-config-prettier": "^10.1.1",
-    "eslint-import-resolver-typescript": "^4.2.2",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-prettier": "^5.2.3",
-    "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-utils": "^3.0.0",
-    "prettier": "^3.5.3",
-    "typescript": "^5.8.2"
+    "@next/eslint-plugin-next": "~16.2.4",
+    "@typescript-eslint/eslint-plugin": "~8.58.2",
+    "@typescript-eslint/parser": "~8.58.2",
+    "eslint": "~10.2.1",
+    "eslint-config-prettier": "~10.1.8",
+    "eslint-import-resolver-typescript": "~4.4.4",
+    "eslint-plugin-import": "~2.32.0",
+    "eslint-plugin-jsx-a11y": "~6.10.2",
+    "eslint-plugin-prettier": "~5.5.5",
+    "eslint-plugin-react": "~7.37.5",
+    "eslint-plugin-react-hooks": "~7.1.1",
+    "eslint-plugin-simple-import-sort": "~13.0.0",
+    "eslint-utils": "~3.0.0",
+    "prettier": "~3.8.3",
+    "typescript": "~6.0.3"
   },
   "files": [
     "eslint.config.js",
@@ -35,7 +35,7 @@
   ],
   "exports": "./eslint.config.js",
   "devDependencies": {
-    "@eslint/js": "^9.23.0",
-    "globals": "^17.0.0"
+    "@eslint/js": "~10.0.1",
+    "globals": "~17.5.0"
   }
 }
