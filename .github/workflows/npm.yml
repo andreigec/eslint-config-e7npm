@@ -4,7 +4,7 @@ concurrency:
   cancel-in-progress: true
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: write
@@ -15,54 +15,54 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v6
+      - name: Checkout
+        uses: actions/checkout@v6
 
-    - name: Install Node.js
-      uses: actions/setup-node@v6
-      with:
-        node-version: lts/*
-        registry-url: https://registry.npmjs.org
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+          registry-url: https://registry.npmjs.org
 
-    - uses: pnpm/action-setup@v6
-      name: Install pnpm
-      id: pnpm-install
-      with:
-        version: 10
+      - uses: pnpm/action-setup@v6
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 10
 
-    - name: Get pnpm store directory
-      id: pnpm-cache
-      shell: bash
-      run: |
-        echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-    - uses: actions/cache@v5
-      name: Setup pnpm cache
-      with:
-        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-pnpm-store-
+      - uses: actions/cache@v5
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
-    - name: Install dependencies
-      run: pnpm install
+      - name: Install dependencies
+        run: pnpm install
 
-    - name: lint
-      run: |
-        pnpm -w run lint
+      - name: lint
+        run: |
+          pnpm -w run lint
 
-    - uses:  'phips28/gh-action-bump-version@master'
-      name:  'Automated Version Bump'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        commit-message: 'CI: bumps version to {{version}} [skip ci]'
+      - uses: 'phips28/gh-action-bump-version@master'
+        name: 'Automated Version Bump'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          commit-message: 'CI: bumps version to {{version}} [skip ci]'
 
-    - name: Publish
-      run: pnpm publish
+      - name: Publish
+        run: pnpm publish
 
-    - name: notify analytica of build
-      if: always()
-      uses: andreigecanalytica/analytica.click.gh@v2
-      with:
-        ANALYTICA_TOKEN: '${{ secrets.ANALYTICATOKEN }}'
+      - name: notify analytica of build
+        if: always()
+        uses: andreigecanalytica/analytica.click.gh@v2
+        with:
+          ANALYTICA_TOKEN: '${{ secrets.ANALYTICATOKEN }}'

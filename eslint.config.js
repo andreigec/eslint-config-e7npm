@@ -19,12 +19,22 @@ const baseConfig = [
     ],
   },
 
-   js.configs.recommended,
+  {
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.es2021,
+        ...globals.node,
+      },
+    },
+  },
+
+  js.configs.recommended,
 
   {
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
-      parser: parser,
+      parser,
       parserOptions: {
         project: './tsconfig.json',
         ecmaVersion: 2021,
@@ -36,16 +46,16 @@ const baseConfig = [
         ...globals.node,
         React: true,
         JSX: true,
-        NodeJS: true
+        NodeJS: true,
       },
     },
     plugins: {
       '@typescript-eslint': typescript,
-      'react': require('eslint-plugin-react'),
+      react: require('eslint-plugin-react'),
       'react-hooks': require('eslint-plugin-react-hooks'),
-      'prettier': require('eslint-plugin-prettier'),
+      prettier: require('eslint-plugin-prettier'),
       'jsx-a11y': require('eslint-plugin-jsx-a11y'),
-      'import': require('eslint-plugin-import'),
+      import: require('eslint-plugin-import'),
       'simple-import-sort': require('eslint-plugin-simple-import-sort'),
       '@next/next': nextPlugin,
     },
@@ -114,9 +124,21 @@ const baseConfig = [
         'off',
         { blankLine: 'never', prev: ['import'], next: ['import'] },
         { blankLine: 'never', prev: ['expression'], next: ['expression', 'multiline-expression'] },
-        { blankLine: 'never', prev: ['singleline-const', 'singleline-let', 'singleline-var'], next: ['function', 'expression', 'const', 'let', 'var'] },
-        { blankLine: 'always', prev: ['multiline-const', 'multiline-let', 'multiline-var'], next: ['function', 'expression', 'const', 'let', 'var', 'block-like'] },
-        { blankLine: 'always', prev: ['multiline-expression'], next: ['expression', 'multiline-expression'] },
+        {
+          blankLine: 'never',
+          prev: ['singleline-const', 'singleline-let', 'singleline-var'],
+          next: ['function', 'expression', 'const', 'let', 'var'],
+        },
+        {
+          blankLine: 'always',
+          prev: ['multiline-const', 'multiline-let', 'multiline-var'],
+          next: ['function', 'expression', 'const', 'let', 'var', 'block-like'],
+        },
+        {
+          blankLine: 'always',
+          prev: ['multiline-expression'],
+          next: ['expression', 'multiline-expression'],
+        },
         { blankLine: 'always', prev: ['const', 'let', 'var'], next: ['return', 'block'] },
         { blankLine: 'always', prev: ['block-like'], next: ['const', 'let', 'var', 'block-like'] },
         { blankLine: 'always', prev: ['if'], next: ['if', 'expression'] },
@@ -129,11 +151,11 @@ const baseConfig = [
     files: ['**/*.js', '**/*.jsx'],
     ...js.configs.recommended,
     plugins: {
-      'react': require('eslint-plugin-react'),
+      react: require('eslint-plugin-react'),
       'react-hooks': require('eslint-plugin-react-hooks'),
-      'prettier': require('eslint-plugin-prettier'),
+      prettier: require('eslint-plugin-prettier'),
       'jsx-a11y': require('eslint-plugin-jsx-a11y'),
-      'import': require('eslint-plugin-import'),
+      import: require('eslint-plugin-import'),
       'simple-import-sort': require('eslint-plugin-simple-import-sort'),
     },
     languageOptions: {

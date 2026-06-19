@@ -1,16 +1,5 @@
 {
   "extends": "./tsconfig.default.json",
-  "include": [
-    "*.json",
-    "*.js",
-    "*.ts",
-    "*.tsx",
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/node_modules/**",
-    "dist",
-    "build"
-  ]
+  "include": ["*.json", "*.js", "*.ts", "*.tsx", "src/**/*"],
+  "exclude": ["node_modules", "**/node_modules/**", "dist", "build"]
 }

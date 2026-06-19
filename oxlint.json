@@ -1,0 +1,57 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "import", "react"],
+  "categories": {
+    "correctness": "error"
+  },
+  "env": {
+    "browser": true,
+    "builtin": true,
+    "es2021": true,
+    "node": true
+  },
+  "globals": {
+    "JSX": "readonly",
+    "NodeJS": "readonly",
+    "React": "readonly"
+  },
+  "ignorePatterns": [
+    "build/**",
+    "**/build/**",
+    "dist/**",
+    "**/dist/**",
+    "node_modules/**",
+    "**/node_modules/**",
+    ".next/**",
+    "**/.next/**",
+    "cdk.out/**",
+    "**/cdk.out/**"
+  ],
+  "rules": {
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/prefer-default-export": "off",
+    "no-await-in-loop": "warn",
+    "no-console": "warn",
+    "no-unused-expressions": "error",
+    "no-unused-vars": "error",
+    "no-var": "error",
+    "object-shorthand": "error",
+    "prefer-const": "error",
+    "react/exhaustive-deps": "warn",
+    "react/no-array-index-key": "error",
+    "react/react-in-jsx-scope": "off",
+    "react/rules-of-hooks": "error",
+    "typescript/ban-ts-comment": "off",
+    "typescript/consistent-type-exports": "error",
+    "typescript/consistent-type-imports": "error",
+    "typescript/explicit-function-return-type": "off",
+    "typescript/explicit-module-boundary-types": "off",
+    "typescript/no-explicit-any": "warn",
+    "typescript/no-floating-promises": "error",
+    "typescript/no-unnecessary-condition": "warn",
+    "typescript/prefer-nullish-coalescing": "warn",
+    "typescript/return-await": "error",
+    "typescript/switch-exhaustiveness-check": "error"
+  }
+}

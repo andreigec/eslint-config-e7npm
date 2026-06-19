@@ -1,9 +1,5 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "labels": [
-    "eslint-config-e7npm"
-  ],
-  "extends": [
-    "github>andreigec/renovate"
-  ]
+  "labels": ["eslint-config-e7npm"],
+  "extends": ["github>andreigec/renovate"]
 }

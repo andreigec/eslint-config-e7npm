@@ -5,12 +5,40 @@
     "type": "git",
     "url": "https://github.com/andreigec/eslint-config-e7npm.git"
   },
+  "bin": {
+    "e7-jscpd": "./bin/e7-jscpd.cjs",
+    "e7-knip": "./bin/e7-knip.cjs",
+    "e7-min": "./bin/e7-min.cjs",
+    "e7-oxfmt": "./bin/e7-oxfmt.cjs",
+    "e7-oxlint": "./bin/e7-oxlint.cjs"
+  },
+  "files": [
+    "bin",
+    "eslint.config.js",
+    "oxfmt.json",
+    "oxlint.json",
+    "tsconfig.default.json"
+  ],
+  "exports": {
+    ".": "./eslint.config.js",
+    "./eslint.config.js": "./eslint.config.js",
+    "./oxfmt": "./oxfmt.json",
+    "./oxfmt.json": "./oxfmt.json",
+    "./oxlint": "./oxlint.json",
+    "./oxlint.json": "./oxlint.json",
+    "./tsconfig.default.json": "./tsconfig.default.json"
+  },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "format": "eslint . --fix",
+    "format": "node ./bin/e7-oxfmt.cjs .",
+    "jscpd": "node ./bin/e7-jscpd.cjs",
+    "knip": "node ./bin/e7-knip.cjs",
     "lint:tsc": "tsc --noEmit",
     "lint:eslint": "eslint .",
-    "lint": "pnpm run /^lint:/"
+    "lint:oxfmt": "node ./bin/e7-oxfmt.cjs --check .",
+    "lint:oxlint": "node ./bin/e7-oxlint.cjs .",
+    "lint": "pnpm run /^lint:/",
+    "min": "node ./bin/e7-min.cjs"
   },
   "dependencies": {
     "@next/eslint-plugin-next": "~16.2.4",
@@ -26,14 +54,13 @@
     "eslint-plugin-react-hooks": "~7.1.1",
     "eslint-plugin-simple-import-sort": "~13.0.0",
     "eslint-utils": "~3.0.0",
+    "jscpd": "4.2.4",
+    "knip": "6.14.2",
+    "oxfmt": "0.55.0",
+    "oxlint": "1.70.0",
     "prettier": "~3.8.3",
     "typescript": "~6.0.3"
   },
-  "files": [
-    "eslint.config.js",
-    "tsconfig.default.json"
-  ],
-  "exports": "./eslint.config.js",
   "devDependencies": {
     "@eslint/js": "~10.0.1",
     "globals": "~17.6.0"
