@@ -6,6 +6,7 @@
     "url": "https://github.com/andreigec/eslint-config-e7npm.git"
   },
   "bin": {
+    "e7-cloc": "./bin/e7-cloc.cjs",
     "e7-jscpd": "./bin/e7-jscpd.cjs",
     "e7-knip": "./bin/e7-knip.cjs",
     "e7-min": "./bin/e7-min.cjs",
@@ -30,6 +31,7 @@
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
+    "cloc": "node ./bin/e7-cloc.cjs",
     "format": "node ./bin/e7-oxfmt.cjs .",
     "jscpd": "node ./bin/e7-jscpd.cjs",
     "knip": "node ./bin/e7-knip.cjs",
