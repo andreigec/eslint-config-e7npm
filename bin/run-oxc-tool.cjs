@@ -18,8 +18,7 @@ const resolveBin = ({ binName, packageName }) => {
   return path.join(path.dirname(packageJsonPath), binPath);
 };
 
-const runOxcTool = ({ binName, packageName, configName }) => {
-  const args = process.argv.slice(2);
+const runOxcTool = ({ binName, packageName, configName, args = process.argv.slice(2) }) => {
   const configPath = path.resolve(__dirname, '..', configName);
   const finalArgs = hasConfigArg(args) ? args : ['--config', configPath, ...args];
   const result = spawnSync(process.execPath, [resolveBin({ binName, packageName }), ...finalArgs], {

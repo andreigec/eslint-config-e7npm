@@ -1,7 +1,7 @@
 const { spawnSync } = require('node:child_process');
 const path = require('node:path');
 
-const runPackageBin = ({ binName, args }) => {
+const runPackageBin = ({ binName, args, exit = true }) => {
   const binDir = path.resolve(__dirname, '..', 'node_modules', '.bin');
   const pathKey = process.platform === 'win32' ? 'Path' : 'PATH';
   const result = spawnSync(binName, args, {
@@ -17,7 +17,13 @@ const runPackageBin = ({ binName, args }) => {
     throw result.error;
   }
 
-  process.exit(result.status ?? 1);
+  const status = result.status ?? 1;
+
+  if (exit) {
+    process.exit(status);
+  }
+
+  return status;
 };
 
 module.exports = {

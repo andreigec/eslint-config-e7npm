@@ -7,8 +7,7 @@ const path = require('node:path');
 
 const ts = require('typescript');
 
-const repoRoot = process.cwd();
-const packagesRoot = path.join(repoRoot, 'packages');
+const { discoverProjects } = require('./discover-projects.cjs');
 
 main().catch((error) => {
   console.error(error);
@@ -16,12 +15,11 @@ main().catch((error) => {
 });
 
 async function main() {
-  const packages = await discoverPackages();
+  const packages = await discoverProjects();
   const rows = [];
 
   for (const workspacePackage of packages) {
-    const sourceRoot = path.join(workspacePackage.dir, 'src');
-    const files = await collectTypeScriptFiles(sourceRoot);
+    const files = await collectTypeScriptFiles(workspacePackage.sourceRoot);
     let lines = 0;
 
     for (const file of files) {
@@ -32,49 +30,6 @@ async function main() {
   }
 
   printTable(rows);
-}
-
-async function discoverPackages() {
-  let entries;
-
-  try {
-    entries = await readdir(packagesRoot, { withFileTypes: true });
-  } catch (error) {
-    if (error?.code === 'ENOENT') {
-      return [];
-    }
-
-    throw error;
-  }
-
-  const packages = [];
-
-  for (const entry of entries) {
-    if (!entry.isDirectory()) {
-      continue;
-    }
-
-    const packageDir = path.join(packagesRoot, entry.name);
-    const manifestPath = path.join(packageDir, 'package.json');
-
-    try {
-      const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
-
-      if (typeof manifest.name !== 'string' || manifest.name.length === 0) {
-        throw new Error(`Missing package name in ${manifestPath}`);
-      }
-
-      packages.push({ dir: packageDir, name: manifest.name });
-    } catch (error) {
-      if (error?.code === 'ENOENT') {
-        continue;
-      }
-
-      throw error;
-    }
-  }
-
-  return packages.toSorted((left, right) => left.name.localeCompare(right.name));
 }
 
 async function collectTypeScriptFiles(dir) {
