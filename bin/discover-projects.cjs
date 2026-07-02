@@ -11,6 +11,7 @@ const ignoredProjectDirs = new Set([
   'node_modules',
   'out',
 ]);
+const scriptExtensions = new Set(['.js', '.mjs', '.cjs', '.jsx', '.ts', '.tsx', '.mts', '.cts']);
 
 async function discoverProjects({ cwd = process.cwd(), rootName = 'packages' } = {}) {
   const root = path.join(cwd, rootName);
@@ -46,10 +47,14 @@ async function collectProjects({ cwd, dir, projects, root }) {
   const manifest = await readPackageManifest(dir);
   const sourceRoot = path.join(dir, 'src');
   const hasSourceRoot = await isDirectory(sourceRoot);
+  const hasScriptSourceFiles =
+    hasSourceRoot && (await hasFilesWithExtensions(sourceRoot, scriptExtensions));
 
-  if (manifest?.name || hasSourceRoot) {
+  if (manifest) {
     projects.push({
       dir,
+      hasScriptSourceFiles,
+      hasSourceRoot,
       name: manifest?.name ?? getFallbackProjectName({ dir, root }),
       relativeDir: toPosixPath(path.relative(cwd, dir)),
       sourceRoot,
@@ -67,6 +72,41 @@ async function collectProjects({ cwd, dir, projects, root }) {
 
     await collectProjects({ cwd, dir: path.join(dir, entry.name), projects, root });
   }
+}
+
+async function hasFilesWithExtensions(dir, extensions) {
+  let entries;
+
+  try {
+    entries = await readdir(dir, { withFileTypes: true });
+  } catch (error) {
+    if (error?.code === 'ENOENT') {
+      return false;
+    }
+
+    throw error;
+  }
+
+  for (const entry of entries) {
+    const entryPath = path.join(dir, entry.name);
+
+    if (entry.isDirectory()) {
+      if (
+        !ignoredProjectDirs.has(entry.name) &&
+        (await hasFilesWithExtensions(entryPath, extensions))
+      ) {
+        return true;
+      }
+
+      continue;
+    }
+
+    if (entry.isFile() && extensions.has(path.extname(entry.name))) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 async function collectDirsByName({ cwd, dir, dirName, dirs }) {

@@ -20,15 +20,16 @@ async function main() {
 
 async function getDefaultArgs() {
   const projects = await discoverProjects();
-  const paths =
-    projects.length > 0 ? projects.map((project) => `${project.relativeDir}/src`) : ['.'];
+  const paths = projects
+    .filter((project) => project.hasScriptSourceFiles)
+    .map((project) => `${project.relativeDir}/src`);
 
   return [
     '--min-lines',
     '8',
     '--threshold',
     '0',
-    ...paths,
+    ...(paths.length > 0 ? paths : ['.']),
     '--pattern',
     '**/*.{ts,tsx}',
     '--ignore',

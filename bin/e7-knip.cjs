@@ -112,6 +112,13 @@ async function createKnipConfig(tempDir) {
 }
 
 function getDefaultWorkspaceConfig(project) {
+  if (!project.hasScriptSourceFiles) {
+    return {
+      entry: [],
+      project: [],
+    };
+  }
+
   const isTestWorkspace = project.relativeDir.split('/').includes('tests');
 
   return {
