@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { runOxcTool } = require('./run-oxc-tool.cjs');
+const { runOxcTool } = require('./run-oxc-tool');
 
 runOxcTool({
   binName: 'oxlint',

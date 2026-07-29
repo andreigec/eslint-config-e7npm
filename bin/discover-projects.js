@@ -61,17 +61,14 @@ async function collectProjects({ cwd, dir, projects, root }) {
     });
   }
 
-  for (const entry of entries) {
-    if (!entry.isDirectory()) {
-      continue;
-    }
-
-    if (entry.name === 'src' || ignoredProjectDirs.has(entry.name)) {
-      continue;
-    }
-
-    await collectProjects({ cwd, dir: path.join(dir, entry.name), projects, root });
-  }
+  await Promise.all(
+    entries
+      .filter(
+        (entry) =>
+          entry.isDirectory() && entry.name !== 'src' && !ignoredProjectDirs.has(entry.name),
+      )
+      .map((entry) => collectProjects({ cwd, dir: path.join(dir, entry.name), projects, root })),
+  );
 }
 
 async function hasFilesWithExtensions(dir, extensions) {
@@ -87,26 +84,17 @@ async function hasFilesWithExtensions(dir, extensions) {
     throw error;
   }
 
-  for (const entry of entries) {
-    const entryPath = path.join(dir, entry.name);
-
-    if (entry.isDirectory()) {
-      if (
-        !ignoredProjectDirs.has(entry.name) &&
-        (await hasFilesWithExtensions(entryPath, extensions))
-      ) {
-        return true;
-      }
-
-      continue;
-    }
-
-    if (entry.isFile() && extensions.has(path.extname(entry.name))) {
-      return true;
-    }
+  if (entries.some((entry) => entry.isFile() && extensions.has(path.extname(entry.name)))) {
+    return true;
   }
 
-  return false;
+  const childResults = await Promise.all(
+    entries
+      .filter((entry) => entry.isDirectory() && !ignoredProjectDirs.has(entry.name))
+      .map((entry) => hasFilesWithExtensions(path.join(dir, entry.name), extensions)),
+  );
+
+  return childResults.some(Boolean);
 }
 
 async function collectDirsByName({ cwd, dir, dirName, dirs }) {
@@ -122,20 +110,20 @@ async function collectDirsByName({ cwd, dir, dirName, dirs }) {
     throw error;
   }
 
-  for (const entry of entries) {
-    if (!entry.isDirectory() || ignoredProjectDirs.has(entry.name)) {
-      continue;
-    }
+  await Promise.all(
+    entries
+      .filter((entry) => entry.isDirectory() && !ignoredProjectDirs.has(entry.name))
+      .map((entry) => {
+        const entryPath = path.join(dir, entry.name);
 
-    const entryPath = path.join(dir, entry.name);
+        if (entry.name === dirName) {
+          dirs.push(toPosixPath(path.relative(cwd, entryPath)));
+          return undefined;
+        }
 
-    if (entry.name === dirName) {
-      dirs.push(toPosixPath(path.relative(cwd, entryPath)));
-      continue;
-    }
-
-    await collectDirsByName({ cwd, dir: entryPath, dirName, dirs });
-  }
+        return collectDirsByName({ cwd, dir: entryPath, dirName, dirs });
+      }),
+  );
 }
 
 async function readPackageManifest(dir) {

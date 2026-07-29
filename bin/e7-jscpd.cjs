@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 
-const { runPackageBin } = require('./run-package-bin.cjs');
-const { discoverProjects } = require('./discover-projects.cjs');
+const { runPackageBin } = require('./run-package-bin');
+const { discoverProjects } = require('./discover-projects');
 
 const args = process.argv.slice(2);
 
 main().catch((error) => {
-  console.error(error);
+  process.stderr.write(
+    `${error instanceof Error ? (error.stack ?? error.message) : String(error)}\n`,
+  );
   process.exitCode = 1;
 });
 

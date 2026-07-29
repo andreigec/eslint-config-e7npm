@@ -104,6 +104,7 @@ const baseConfig = [
       'no-console': 'warn',
       'object-shorthand': 'error',
       'import/first': 'error',
+      'import/extensions': ['error', 'never'],
       'import/newline-after-import': 'error',
       'import/prefer-default-export': 'off',
       'react/react-in-jsx-scope': 'off',

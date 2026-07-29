@@ -5,11 +5,12 @@
     },
   ],
   "settings": {
-    "editor.bracketPairColorization.enabled": true,
-    "editor.guides.bracketPairs": "active",
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "explicit",
+      "source.fixAll.oxc": "explicit",
     },
+
     "typescript.tsdk": "node_modules\\typescript\\lib",
     "files.exclude": {
       "dist": true,

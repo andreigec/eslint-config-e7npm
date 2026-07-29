@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
-const { discoverDirsByName } = require('./discover-projects.cjs');
-const { runOxcTool } = require('./run-oxc-tool.cjs');
+const { discoverDirsByName } = require('./discover-projects');
+const { runOxcTool } = require('./run-oxc-tool');
 
 main().catch((error) => {
-  console.error(error);
+  process.stderr.write(
+    `${error instanceof Error ? (error.stack ?? error.message) : String(error)}\n`,
+  );
   process.exitCode = 1;
 });
 

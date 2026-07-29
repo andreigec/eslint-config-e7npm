@@ -7,7 +7,7 @@ const path = require('node:path');
 
 const ts = require('typescript');
 
-const { discoverProjects } = require('./discover-projects.cjs');
+const { discoverProjects } = require('./discover-projects');
 
 main().catch((error) => {
   console.error(error);

@@ -6,14 +6,16 @@ const path = require('node:path');
 
 const ts = require('typescript');
 
-const { discoverProjects } = require('./discover-projects.cjs');
-const { runPackageBin } = require('./run-package-bin.cjs');
+const { discoverProjects } = require('./discover-projects');
+const { runPackageBin } = require('./run-package-bin');
 
 const args = process.argv.slice(2);
 const defaultExtensions = '{js,mjs,cjs,jsx,ts,tsx,mts,cts}';
 
 main().catch((error) => {
-  console.error(error);
+  process.stderr.write(
+    `${error instanceof Error ? (error.stack ?? error.message) : String(error)}\n`,
+  );
   process.exitCode = 1;
 });
 
@@ -50,27 +52,16 @@ async function hasUnsupportedDefaultConfig() {
     return false;
   }
 
-  for (const fileName of [
+  const configPaths = [
     'knip.js',
     'knip.ts',
     'knip.config.js',
     'knip.config.ts',
     'knip.config.mjs',
     'knip.config.cjs',
-  ]) {
-    const configPath = path.join(process.cwd(), fileName);
+  ].map((fileName) => path.join(process.cwd(), fileName));
 
-    try {
-      await readFile(configPath);
-      return true;
-    } catch (error) {
-      if (error?.code !== 'ENOENT') {
-        throw error;
-      }
-    }
-  }
-
-  return false;
+  return (await Promise.all(configPaths.map(fileExists))).some(Boolean);
 }
 
 async function createKnipConfig(tempDir) {
@@ -157,22 +148,16 @@ async function readDefaultKnipConfig() {
 
 async function getDefaultIgnoreDependencies(projects) {
   const presentDependencies = new Set();
-
-  for (const manifestPath of [
+  const manifestPaths = [
     path.join(process.cwd(), 'package.json'),
     ...projects.map((project) => path.join(project.dir, 'package.json')),
-  ]) {
-    try {
-      const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
+  ];
+  const manifests = await Promise.all(manifestPaths.map(readJsonIfExists));
 
-      addDependencyNames(presentDependencies, manifest.dependencies);
-      addDependencyNames(presentDependencies, manifest.devDependencies);
-      addDependencyNames(presentDependencies, manifest.optionalDependencies);
-    } catch (error) {
-      if (error?.code !== 'ENOENT') {
-        throw error;
-      }
-    }
+  for (const manifest of manifests) {
+    addDependencyNames(presentDependencies, manifest?.dependencies);
+    addDependencyNames(presentDependencies, manifest?.devDependencies);
+    addDependencyNames(presentDependencies, manifest?.optionalDependencies);
   }
 
   return ['@tauri-apps/cli'].filter((dependency) => presentDependencies.has(dependency));
@@ -189,20 +174,37 @@ function addDependencyNames(dependencyNames, dependencies) {
 }
 
 async function findJsonKnipConfig() {
-  for (const fileName of ['knip.json', '.knip.json', 'knip.jsonc', '.knip.jsonc']) {
-    const configPath = path.join(process.cwd(), fileName);
+  const configPaths = ['knip.json', '.knip.json', 'knip.jsonc', '.knip.jsonc'].map((fileName) =>
+    path.join(process.cwd(), fileName),
+  );
+  const existing = await Promise.all(configPaths.map(fileExists));
 
-    try {
-      await readFile(configPath);
-      return configPath;
-    } catch (error) {
-      if (error?.code !== 'ENOENT') {
-        throw error;
-      }
+  return configPaths[existing.indexOf(true)];
+}
+
+async function fileExists(filePath) {
+  try {
+    await readFile(filePath);
+    return true;
+  } catch (error) {
+    if (error?.code === 'ENOENT') {
+      return false;
     }
-  }
 
-  return undefined;
+    throw error;
+  }
+}
+
+async function readJsonIfExists(filePath) {
+  try {
+    return JSON.parse(await readFile(filePath, 'utf8'));
+  } catch (error) {
+    if (error?.code === 'ENOENT') {
+      return undefined;
+    }
+
+    throw error;
+  }
 }
 
 function parseJsonConfig(filePath, source) {
