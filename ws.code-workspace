@@ -5,35 +5,18 @@
     },
   ],
   "settings": {
+    "search.exclude": {
+      "**/.pnpm": true,
+      "**/.pnp.*": true,
+    },
     "editor.defaultFormatter": "oxc.oxc-vscode",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.fixAll.oxc": "explicit",
     },
-
-    "typescript.tsdk": "node_modules\\typescript\\lib",
-    "files.exclude": {
-      "dist": true,
-      "**/.git": true,
-      "**/.DS_Store": true,
-      "**/node_modules": true,
-      "node_modules": true,
-    },
-  },
-
-  "launch": {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "type": "node-terminal",
-        "name": "Debug Current Test File (npm run test)",
-        "request": "launch",
-        "command": "ts-node -- ${file}",
-        "cwd": "${fileDirname}",
-      },
-    ],
+    "oxc.fmt.configPath": "./node_modules/eslint-config-e7npm/oxfmt.json",
   },
   "extensions": {
-    "recommendations": ["arcanis.vscode-zipfs", "dbaeumer.vscode-eslint"],
+    "recommendations": ["oxc.oxc-vscode"],
   },
 }

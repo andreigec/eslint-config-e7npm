@@ -41,6 +41,7 @@
     "prefer-const": "error",
     "react/exhaustive-deps": "warn",
     "react/no-array-index-key": "error",
+    "react/react-compiler": "error",
     "react/react-in-jsx-scope": "off",
     "react/rules-of-hooks": "error",
     "typescript/ban-ts-comment": "off",
