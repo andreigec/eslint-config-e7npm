@@ -3,6 +3,7 @@
   "singleQuote": true,
   "trailingComma": "all",
   "sortImports": true,
+  "sortTailwindcss": true,
   "sortPackageJson": {
     "sortScripts": false
   },
