@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const { discoverDirsByName } = require('./discover-projects');
-const { runOxcTool } = require('./run-oxc-tool');
+const { getProjectConfigPath, runOxcTool } = require('./run-oxc-tool');
 
 main().catch((error) => {
   process.stderr.write(
@@ -31,7 +31,8 @@ async function main() {
     binName: 'oxlint',
     packageName: 'oxlint',
     configName: 'oxlint.json',
-    args: ['--fix', '--fix-suggestions', '.'],
+    configPath: getProjectConfigPath('oxlint.json'),
+    args: ['--type-aware', '--fix', '--fix-suggestions', '.'],
   });
 }
 

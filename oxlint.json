@@ -2,6 +2,9 @@
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": ["typescript", "import", "react"],
   "jsPlugins": ["oxlint-tailwindcss"],
+  "options": {
+    "typeAware": true
+  },
   "categories": {
     "correctness": "error"
   },
@@ -57,8 +60,18 @@
     "typescript/no-explicit-any": "warn",
     "typescript/no-floating-promises": "error",
     "typescript/no-unnecessary-condition": "warn",
-    "typescript/prefer-nullish-coalescing": "warn",
-    "typescript/return-await": "error",
+    "typescript/prefer-nullish-coalescing": [
+      "warn",
+      {
+        "ignorePrimitives": {
+          "string": true,
+          "boolean": true
+        },
+        "ignoreMixedLogicalExpressions": true
+      }
+    ],
+    "typescript/require-array-sort-compare": "off",
+    "typescript/return-await": ["error", "never"],
     "typescript/switch-exhaustiveness-check": "error"
   }
 }

@@ -1,2 +1,10 @@
 allowBuilds:
   unrs-resolver: true
+minimumReleaseAgeExclude:
+  - jscpd-darwin-arm64@5.0.16
+  - jscpd-darwin-x64@5.0.16
+  - jscpd-linux-arm64-gnu@5.0.16
+  - jscpd-linux-x64-gnu@5.0.16
+  - jscpd-linux-x64-musl@5.0.16
+  - jscpd-windows-x64-msvc@5.0.16
+  - jscpd@5.0.16
