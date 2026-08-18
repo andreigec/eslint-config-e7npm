@@ -11,14 +11,32 @@ main().catch((error) => {
 });
 
 async function main() {
-  const args = process.argv.slice(2);
+  const cliArgs = process.argv.slice(2);
+  const runLint = !cliArgs.includes('--no-lint');
+  const args = cliArgs.filter((arg) => arg !== '--no-lint');
 
-  runOxcTool({
+  const formatStatus = runOxcTool({
     binName: 'oxfmt',
     packageName: 'oxfmt',
     configName: 'oxfmt.json',
     args: args.length === 0 ? await getDefaultArgs() : args,
+    exit: false,
   });
+
+  if (formatStatus !== 0 || !runLint || shouldSkipLint(args)) {
+    process.exit(formatStatus);
+  }
+
+  runOxcTool({
+    binName: 'oxlint',
+    packageName: 'oxlint',
+    configName: 'oxlint.json',
+    args: ['--fix', '--fix-suggestions', '.'],
+  });
+}
+
+function shouldSkipLint(args) {
+  return args.some((arg) => ['--check', '--help', '-h', '--version', '-V'].includes(arg));
 }
 
 async function getDefaultArgs() {

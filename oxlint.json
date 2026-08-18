@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": ["typescript", "import", "react"],
-  "jsPlugins": ["eslint-plugin-tailwindcss"],
+  "jsPlugins": ["oxlint-tailwindcss"],
   "categories": {
     "correctness": "error"
   },
@@ -45,8 +45,10 @@
     "react/react-compiler": "error",
     "react/react-in-jsx-scope": "off",
     "react/rules-of-hooks": "error",
-    "tailwindcss/no-contradicting-classname": "error",
+    "tailwindcss/enforce-canonical": "warn",
+    "tailwindcss/no-conflicting-classes": "error",
     "tailwindcss/no-unnecessary-arbitrary-value": "warn",
+    "tailwindcss/prefer-scale-token": "warn",
     "typescript/ban-ts-comment": "off",
     "typescript/consistent-type-exports": "error",
     "typescript/consistent-type-imports": "error",

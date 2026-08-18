@@ -10,10 +10,12 @@
       "**/.pnp.*": true,
     },
     "editor.defaultFormatter": "oxc.oxc-vscode",
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "editor.codeActionsOnSave": {
-      "source.fixAll.oxc": "explicit",
+      "source.format.oxc": "always",
+      "source.fixAll.oxc": "always",
     },
+    "oxc.fixKind": "safe_fix_or_suggestion",
     "oxc.fmt.configPath": "./node_modules/eslint-config-e7npm/oxfmt.json",
   },
   "extensions": {

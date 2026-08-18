@@ -3,7 +3,9 @@
   "extends": ["./oxlint.json"],
   "jsPlugins": null,
   "rules": {
-    "tailwindcss/no-contradicting-classname": "off",
-    "tailwindcss/no-unnecessary-arbitrary-value": "off"
+    "tailwindcss/enforce-canonical": "off",
+    "tailwindcss/no-conflicting-classes": "off",
+    "tailwindcss/no-unnecessary-arbitrary-value": "off",
+    "tailwindcss/prefer-scale-token": "off"
   }
 }
