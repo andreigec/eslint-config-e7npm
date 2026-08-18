@@ -1,0 +1,9 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "extends": ["./oxlint.json"],
+  "jsPlugins": null,
+  "rules": {
+    "tailwindcss/no-contradicting-classname": "off",
+    "tailwindcss/no-unnecessary-arbitrary-value": "off"
+  }
+}
