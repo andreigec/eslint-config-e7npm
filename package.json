@@ -54,7 +54,7 @@
     "jscpd": "^5.0.16",
     "knip": "^6.32.2",
     "oxfmt": "^0.63.0",
-    "oxlint": "^1.78.0",
+    "oxlint": "^1.79.0",
     "oxlint-tailwindcss": "^1.9.0",
     "oxlint-tsgolint": "^7.0.2001",
     "prettier": "^3.9.6"
