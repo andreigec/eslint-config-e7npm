@@ -55,7 +55,7 @@ async function collectProjects({ cwd, dir, projects, root }) {
       dir,
       hasScriptSourceFiles,
       hasSourceRoot,
-      name: manifest?.name ?? getFallbackProjectName({ dir, root }),
+      name: manifest.name ?? getFallbackProjectName({ dir, root }),
       relativeDir: toPosixPath(path.relative(cwd, dir)),
       sourceRoot,
     });

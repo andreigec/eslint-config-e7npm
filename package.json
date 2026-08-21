@@ -14,6 +14,7 @@
     "e7-oxlint": "./bin/e7-oxlint.cjs"
   },
   "files": [
+    "README.md",
     "bin",
     "eslint.config.js",
     "oxfmt.json",
