@@ -14,6 +14,7 @@
     "e7-oxlint": "./bin/e7-oxlint.cjs"
   },
   "files": [
+    "README.md",
     "bin",
     "eslint.config.js",
     "oxfmt.json",
@@ -44,7 +45,7 @@
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
-    "eslint": "^10.8.1",
+    "eslint": "^10.9.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
@@ -55,13 +56,13 @@
     "globals": "^17.11.0",
     "jscpd": "^5.0.16",
     "knip": "^6.32.2",
-    "oxfmt": "^0.63.0",
+    "oxfmt": "^0.64.0",
     "oxlint": "^1.79.0",
-    "oxlint-tailwindcss": "^1.9.0",
+    "oxlint-tailwindcss": "^1.10.0",
     "oxlint-tsgolint": "^7.0.2001",
     "prettier": "^3.9.6",
     "strip-json-comments": "^5.0.3",
     "typescript": "^7.0.2"
   },
-  "packageManager": "pnpm@11.9.0"
+  "packageManager": "pnpm@11.22.0"
 }
