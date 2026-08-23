@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 
-const { mkdtemp, readFile, rm, writeFile } = require('node:fs/promises');
+const { mkdtemp, readFile, readdir, rm, writeFile } = require('node:fs/promises');
 const os = require('node:os');
 const path = require('node:path');
-
-const ts = require('typescript');
 
 const { discoverProjects } = require('./discover-projects');
 const { runPackageBin } = require('./run-package-bin');
@@ -69,14 +67,17 @@ async function createKnipConfig(tempDir) {
   const projects = await discoverProjects();
   const defaultIgnoreDependencies = await getDefaultIgnoreDependencies(projects);
   const configuredWorkspaces = isObject(config.workspaces) ? config.workspaces : {};
+  const defaultWorkspaceConfigs = await Promise.all(projects.map(getDefaultWorkspaceConfig));
   const workspaces = {};
 
-  for (const project of projects) {
+  for (const [index, project] of projects.entries()) {
+    const defaultWorkspaceConfig = defaultWorkspaceConfigs[index];
+    const configuredWorkspace = configuredWorkspaces[project.relativeDir];
+    if (!defaultWorkspaceConfig && !isObject(configuredWorkspace)) continue;
+
     workspaces[project.relativeDir] = {
-      ...getDefaultWorkspaceConfig(project),
-      ...(isObject(configuredWorkspaces[project.relativeDir])
-        ? configuredWorkspaces[project.relativeDir]
-        : {}),
+      ...defaultWorkspaceConfig,
+      ...(isObject(configuredWorkspace) ? configuredWorkspace : {}),
     };
   }
 
@@ -102,26 +103,17 @@ async function createKnipConfig(tempDir) {
   return configPath;
 }
 
-function getDefaultWorkspaceConfig(project) {
-  if (!project.hasScriptSourceFiles) {
-    return {
-      entry: [],
-      project: [],
-    };
+async function getDefaultWorkspaceConfig(project) {
+  const entries = await readdir(project.dir, { withFileTypes: true });
+  const entry = entries.some(
+    (item) => item.isFile() && /\.config\.(?:js|mjs|cjs|ts|mts|cts)$/.test(item.name),
+  )
+    ? [`*.config.${defaultExtensions}`]
+    : [];
+  if (await fileExists(path.join(project.dir, 'cdk.json'))) {
+    entry.push(`{bin,src}/{app,main,index}.${defaultExtensions}`);
   }
-
-  const isTestWorkspace = project.relativeDir.split('/').includes('tests');
-
-  return {
-    entry: isTestWorkspace
-      ? [`src/**/*.{test,spec}.${defaultExtensions}`]
-      : [
-          `src/{index,main,cli}.${defaultExtensions}`,
-          `src/**/{index,main,cli}.${defaultExtensions}`,
-          `src/**/*.{test,spec}.${defaultExtensions}`,
-        ],
-    project: [`src/**/*.${defaultExtensions}`],
-  };
+  return entry.length > 0 ? { entry } : undefined;
 }
 
 async function readDefaultKnipConfig() {
@@ -160,7 +152,18 @@ async function getDefaultIgnoreDependencies(projects) {
     addDependencyNames(presentDependencies, manifest?.optionalDependencies);
   }
 
-  return ['@tauri-apps/cli'].filter((dependency) => presentDependencies.has(dependency));
+  const rootManifest = manifests[0];
+  const ignoredDependencies = ['@tauri-apps/cli'];
+  if (
+    isObject(rootManifest?.dependencies) &&
+    Object.hasOwn(rootManifest.dependencies, 'eslint-config-e7npm')
+  ) {
+    ignoredDependencies.push('@eslint/js', 'globals');
+  }
+  if (rootManifest?.name === 'eslint-config-e7npm') {
+    ignoredDependencies.push('jscpd', 'oxfmt', 'oxlint', 'oxlint-tailwindcss', 'oxlint-tsgolint');
+  }
+  return ignoredDependencies.filter((dependency) => presentDependencies.has(dependency));
 }
 
 function addDependencyNames(dependencyNames, dependencies) {
@@ -207,15 +210,17 @@ async function readJsonIfExists(filePath) {
   }
 }
 
-function parseJsonConfig(filePath, source) {
-  const result = ts.parseConfigFileTextToJson(filePath, source);
-
-  if (result.error) {
-    const message = ts.flattenDiagnosticMessageText(result.error.messageText, '\n');
-    throw new Error(`Could not parse ${filePath}: ${message}`);
+async function parseJsonConfig(filePath, source) {
+  const { default: stripJsonComments } = await import('strip-json-comments');
+  try {
+    const config = JSON.parse(stripJsonComments(source, { trailingCommas: true }));
+    return isObject(config) ? config : {};
+  } catch (error) {
+    throw new Error(
+      `Could not parse ${filePath}: ${error instanceof Error ? error.message : String(error)}`,
+      { cause: error },
+    );
   }
-
-  return isObject(result.config) ? result.config : {};
 }
 
 function hasConfigArg(argsToCheck) {

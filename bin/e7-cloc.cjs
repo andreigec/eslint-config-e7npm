@@ -5,8 +5,6 @@
 const { readFile, readdir, stat } = require('node:fs/promises');
 const path = require('node:path');
 
-const ts = require('typescript');
-
 const { discoverProjects } = require('./discover-projects');
 
 main().catch((error) => {
@@ -15,6 +13,7 @@ main().catch((error) => {
 });
 
 async function main() {
+  const { createScanner, LanguageVariant, SyntaxKind } = await import('typescript/unstable/ast');
   const packages = await discoverProjects();
   const rows = [];
 
@@ -23,7 +22,7 @@ async function main() {
     let lines = 0;
 
     for (const file of files) {
-      lines += await countCodeLines(file);
+      lines += await countCodeLines(file, { createScanner, LanguageVariant, SyntaxKind });
     }
 
     rows.push({ name: workspacePackage.name, lines });
@@ -70,22 +69,32 @@ function isTypeScriptFile(fileName) {
   return fileName.endsWith('.ts') || fileName.endsWith('.tsx');
 }
 
-async function countCodeLines(file) {
+async function countCodeLines(file, { createScanner, LanguageVariant, SyntaxKind }) {
   const source = await readFile(file, 'utf8');
-  const lineStarts = ts.computeLineStarts(source);
+  const lineStarts = computeLineStarts(source);
   const codeLines = new Set();
-  const scanner = ts.createScanner(
-    ts.ScriptTarget.Latest,
+  const scanner = createScanner(
     true,
-    file.endsWith('.tsx') ? ts.LanguageVariant.JSX : ts.LanguageVariant.Standard,
+    file.endsWith('.tsx') ? LanguageVariant.JSX : LanguageVariant.Standard,
     source,
   );
 
-  while (scanner.scan() !== ts.SyntaxKind.EndOfFileToken) {
-    addTokenLines(codeLines, lineStarts, scanner.getTokenStart(), scanner.getTextPos());
+  while (scanner.scan() !== SyntaxKind.EndOfFile) {
+    const start = scanner.getTokenStart();
+    const end = scanner.getTokenEnd();
+    addTokenLines(codeLines, lineStarts, start, end);
+    if (end <= start) scanner.resetTokenState(start + 1);
   }
 
   return codeLines.size;
+}
+
+function computeLineStarts(source) {
+  const lineStarts = [0];
+  for (let index = 0; index < source.length; index += 1) {
+    if (source[index] === '\n') lineStarts.push(index + 1);
+  }
+  return lineStarts;
 }
 
 function addTokenLines(codeLines, lineStarts, start, end) {

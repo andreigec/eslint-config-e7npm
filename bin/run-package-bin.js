@@ -28,12 +28,28 @@ const runPackageBin = ({ binName, packageName, args, exit = true }) => {
 };
 
 const resolveBin = ({ binName, packageName }) => {
-  const packageJsonPath = findPackageJson(require.resolve(packageName));
+  const packageJsonPath = resolvePackageJson(packageName);
   const packageJson = require(packageJsonPath);
   const binPath = typeof packageJson.bin === 'string' ? packageJson.bin : packageJson.bin[binName];
 
+  if (typeof binPath !== 'string') {
+    throw new Error(`Package "${packageName}" does not define the "${binName}" binary`);
+  }
+
   return path.join(path.dirname(packageJsonPath), binPath);
 };
+
+function resolvePackageJson(packageName) {
+  try {
+    return require.resolve(`${packageName}/package.json`);
+  } catch (error) {
+    if (error?.code !== 'ERR_PACKAGE_PATH_NOT_EXPORTED') {
+      throw error;
+    }
+  }
+
+  return findPackageJson(require.resolve(packageName));
+}
 
 function findPackageJson(fromPath) {
   let dir = path.dirname(fromPath);

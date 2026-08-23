@@ -1,13 +1,8 @@
 #!/usr/bin/env node
 
 const { spawn } = require('node:child_process');
+const path = require('node:path');
 
-const pnpm = process.env.npm_execpath
-  ? process.execPath
-  : process.platform === 'win32'
-    ? 'pnpm.cmd'
-    : 'pnpm';
-const pnpmArgsPrefix = process.env.npm_execpath ? [process.env.npm_execpath] : [];
 const spawnOpts = { stdio: 'inherit' };
 
 main();
@@ -24,11 +19,11 @@ async function main() {
   }
 }
 
-function run(script) {
-  console.log(`\n[min] ${script}`);
+function run(tool) {
+  console.log(`\n[min] ${tool}`);
 
   return new Promise((resolve) => {
-    const child = spawn(pnpm, [...pnpmArgsPrefix, 'run', script], spawnOpts);
+    const child = spawn(process.execPath, [path.join(__dirname, `e7-${tool}.cjs`)], spawnOpts);
     child.on('close', (code) => resolve(code ?? 1));
   });
 }

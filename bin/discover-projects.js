@@ -4,7 +4,10 @@ const path = require('node:path');
 const ignoredProjectDirs = new Set([
   '.git',
   '.next',
+  '.next-dev',
+  '.open-next',
   '.turbo',
+  '.wrangler',
   'build',
   'coverage',
   'dist',
@@ -55,7 +58,7 @@ async function collectProjects({ cwd, dir, projects, root }) {
       dir,
       hasScriptSourceFiles,
       hasSourceRoot,
-      name: manifest?.name ?? getFallbackProjectName({ dir, root }),
+      name: manifest.name ?? getFallbackProjectName({ dir, root }),
       relativeDir: toPosixPath(path.relative(cwd, dir)),
       sourceRoot,
     });
