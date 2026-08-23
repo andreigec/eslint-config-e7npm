@@ -66,6 +66,7 @@ async function createKnipConfig(tempDir) {
   const config = await readDefaultKnipConfig();
   const projects = await discoverProjects();
   const defaultIgnoreDependencies = await getDefaultIgnoreDependencies(projects);
+  const defaultEntry = await getConfigEntries(process.cwd());
   const configuredWorkspaces = isObject(config.workspaces) ? config.workspaces : {};
   const defaultWorkspaceConfigs = await Promise.all(projects.map(getDefaultWorkspaceConfig));
   const workspaces = {};
@@ -85,35 +86,44 @@ async function createKnipConfig(tempDir) {
     workspaces[workspace] ??= workspaceConfig;
   }
 
+  const finalConfig = {
+    ...config,
+    ignoreDependencies: mergeUnique(defaultIgnoreDependencies, config.ignoreDependencies),
+    workspaces,
+  };
+  if (defaultEntry.length > 0) {
+    if (projects.length > 0) {
+      workspaces['.'] = {
+        entry: defaultEntry,
+        ...(isObject(workspaces['.']) ? workspaces['.'] : {}),
+      };
+    } else {
+      finalConfig.entry = mergeUnique(defaultEntry, config.entry);
+    }
+  }
+
   const configPath = path.join(tempDir, 'knip.json');
 
-  await writeFile(
-    configPath,
-    `${JSON.stringify(
-      {
-        ...config,
-        ignoreDependencies: mergeUnique(defaultIgnoreDependencies, config.ignoreDependencies),
-        workspaces,
-      },
-      null,
-      2,
-    )}\n`,
-  );
+  await writeFile(configPath, `${JSON.stringify(finalConfig, null, 2)}\n`);
 
   return configPath;
 }
 
 async function getDefaultWorkspaceConfig(project) {
-  const entries = await readdir(project.dir, { withFileTypes: true });
-  const entry = entries.some(
-    (item) => item.isFile() && /\.config\.(?:js|mjs|cjs|ts|mts|cts)$/.test(item.name),
-  )
-    ? [`*.config.${defaultExtensions}`]
-    : [];
+  const entry = await getConfigEntries(project.dir);
   if (await fileExists(path.join(project.dir, 'cdk.json'))) {
     entry.push(`{bin,src}/{app,main,index}.${defaultExtensions}`);
   }
   return entry.length > 0 ? { entry } : undefined;
+}
+
+async function getConfigEntries(dir) {
+  const entries = await readdir(dir, { withFileTypes: true });
+  return entries.some(
+    (item) => item.isFile() && /\.config\.(?:js|mjs|cjs|ts|mts|cts)$/.test(item.name),
+  )
+    ? [`*.config.${defaultExtensions}`]
+    : [];
 }
 
 async function readDefaultKnipConfig() {
