@@ -1,6 +1,7 @@
 const fs = require('node:fs');
-const { spawnSync } = require('node:child_process');
 const path = require('node:path');
+
+const { runPackageBin } = require('./run-package-bin');
 
 const hasConfigArg = (args) =>
   args.some((arg, index) => {
@@ -11,52 +12,47 @@ const hasConfigArg = (args) =>
     return arg.startsWith('-c=') || arg.startsWith('--config=');
   });
 
-const resolveBin = ({ binName, packageName }) => {
-  const packageJsonPath = require.resolve(`${packageName}/package.json`);
-  const packageJson = require(packageJsonPath);
-  const binPath = typeof packageJson.bin === 'string' ? packageJson.bin : packageJson.bin[binName];
+const getOxcArgs = ({ args, configName, projectConfigNames = [], cwd = process.cwd() }) => {
+  if (hasConfigArg(args)) {
+    return args;
+  }
 
-  return path.join(path.dirname(packageJsonPath), binPath);
-};
+  const projectConfigPath = getProjectConfigPath(projectConfigNames, cwd);
+  const configPath = projectConfigPath ?? path.resolve(__dirname, '..', configName);
 
-const getProjectConfigPath = (configName) => {
-  const configPath = path.resolve(process.cwd(), configName);
-  return fs.existsSync(configPath) ? configPath : undefined;
+  return ['--config', configPath, ...args];
 };
 
 const runOxcTool = ({
   binName,
   packageName,
   configName,
-  configPath: customConfigPath,
+  projectConfigNames,
   args = process.argv.slice(2),
   exit = true,
-}) => {
-  const configPath = customConfigPath ?? path.resolve(__dirname, '..', configName);
-  const finalArgs = hasConfigArg(args) ? args : ['--config', configPath, ...args];
-  const packageBinPath = path.resolve(__dirname, '..', 'node_modules', '.bin');
-  const result = spawnSync(process.execPath, [resolveBin({ binName, packageName }), ...finalArgs], {
-    env: {
-      ...process.env,
-      PATH: [packageBinPath, process.env.PATH].filter(Boolean).join(path.delimiter),
-    },
-    stdio: 'inherit',
+}) =>
+  runPackageBin({
+    binName,
+    packageName,
+    args: getOxcArgs({ args, configName, projectConfigNames }),
+    exit,
   });
 
-  if (result.error) {
-    throw result.error;
+function getProjectConfigPath(configNames, cwd) {
+  const configPaths = configNames
+    .map((configName) => path.resolve(cwd, configName))
+    .filter((configPath) => fs.existsSync(configPath));
+
+  if (configPaths.length > 1) {
+    throw new Error(
+      `Multiple project configuration files found: ${configPaths.join(', ')}. Keep only one.`,
+    );
   }
 
-  const status = result.status ?? 1;
-
-  if (exit) {
-    process.exit(status);
-  }
-
-  return status;
-};
+  return configPaths[0];
+}
 
 module.exports = {
-  getProjectConfigPath,
+  getOxcArgs,
   runOxcTool,
 };

@@ -40,8 +40,10 @@
     "lint:eslint": "eslint .",
     "lint:oxfmt": "node ./bin/e7-oxfmt.cjs --check .",
     "lint:oxlint": "node ./bin/e7-oxlint.cjs --config ./oxlint.self.json .",
+    "lint:test": "node --test",
     "lint": "pnpm run /^lint:/",
-    "min": "node ./bin/e7-min.cjs"
+    "min": "node ./bin/e7-min.cjs",
+    "test": "node --test"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
@@ -56,8 +58,8 @@
     "globals": "^17.11.0",
     "jscpd": "^5.0.16",
     "knip": "^6.32.2",
-    "oxfmt": "^0.64.0",
-    "oxlint": "^1.79.0",
+    "oxfmt": "^0.65.0",
+    "oxlint": "^1.80.0",
     "oxlint-tailwindcss": "^1.10.0",
     "oxlint-tsgolint": "^7.0.2001",
     "prettier": "^3.9.6",
