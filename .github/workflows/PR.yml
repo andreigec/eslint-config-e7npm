@@ -4,6 +4,10 @@ concurrency:
   cancel-in-progress: true
 on: [pull_request]
 
+permissions:
+  contents: read
+  checks: read
+
 jobs:
   PR:
     runs-on: ubuntu-latest
