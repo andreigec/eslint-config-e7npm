@@ -9,61 +9,61 @@ importers:
   .:
     dependencies:
       '@eslint/js':
-        specifier: ^10.0.1
+        specifier: 10.0.1
         version: 10.0.1(eslint@10.9.0(jiti@2.7.0))
       eslint:
-        specifier: ^10.9.0
+        specifier: 10.9.0
         version: 10.9.0(jiti@2.7.0)
       eslint-config-prettier:
-        specifier: ^10.1.8
+        specifier: 10.1.8
         version: 10.1.8(eslint@10.9.0(jiti@2.7.0))
       eslint-plugin-import:
-        specifier: ^2.32.0
+        specifier: 2.32.0
         version: 2.32.0(eslint@10.9.0(jiti@2.7.0))
       eslint-plugin-jsx-a11y:
-        specifier: ^6.10.2
+        specifier: 6.10.2
         version: 6.10.2(eslint@10.9.0(jiti@2.7.0))
       eslint-plugin-prettier:
-        specifier: ^5.5.6
+        specifier: 5.5.6
         version: 5.5.6(eslint-config-prettier@10.1.8(eslint@10.9.0(jiti@2.7.0)))(eslint@10.9.0(jiti@2.7.0))(prettier@3.9.6)
       eslint-plugin-react:
-        specifier: ^7.37.5
+        specifier: 7.37.5
         version: 7.37.5(eslint@10.9.0(jiti@2.7.0))
       eslint-plugin-react-hooks:
-        specifier: ^7.1.1
+        specifier: 7.1.1
         version: 7.1.1(eslint@10.9.0(jiti@2.7.0))
       eslint-plugin-simple-import-sort:
-        specifier: ^14.0.0
+        specifier: 14.0.0
         version: 14.0.0(eslint@10.9.0(jiti@2.7.0))
       globals:
-        specifier: ^17.11.0
+        specifier: 17.11.0
         version: 17.11.0
       jscpd:
-        specifier: ^5.0.16
+        specifier: 5.0.16
         version: 5.0.16
       knip:
-        specifier: ^6.32.2
+        specifier: 6.32.2
         version: 6.32.2
       oxfmt:
-        specifier: ^0.65.0
+        specifier: 0.65.0
         version: 0.65.0
       oxlint:
-        specifier: ^1.80.0
+        specifier: 1.80.0
         version: 1.80.0(oxlint-tsgolint@7.0.2001)
       oxlint-tailwindcss:
-        specifier: ^1.10.0
+        specifier: 1.10.0
         version: 1.10.0
       oxlint-tsgolint:
-        specifier: ^7.0.2001
+        specifier: 7.0.2001
         version: 7.0.2001
       prettier:
-        specifier: ^3.9.6
+        specifier: 3.9.6
         version: 3.9.6
       strip-json-comments:
-        specifier: ^5.0.3
+        specifier: 5.0.3
         version: 5.0.3
       typescript:
-        specifier: ^7.0.2
+        specifier: 7.0.2
         version: 7.0.2
 
 packages:
