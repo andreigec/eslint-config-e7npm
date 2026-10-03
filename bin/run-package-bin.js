@@ -3,7 +3,10 @@ const path = require('node:path');
 
 const runPackageBin = ({ binName, packageName, args, exit = true }) => {
   const binDir = path.resolve(__dirname, '..', 'node_modules', '.bin');
-  const pathKey = process.platform === 'win32' ? 'Path' : 'PATH';
+  const pathKey =
+    process.platform === 'win32'
+      ? (Object.keys(process.env).find((key) => key.toUpperCase() === 'PATH') ?? 'Path')
+      : 'PATH';
   const command = packageName ? process.execPath : binName;
   const commandArgs = packageName ? [resolveBin({ binName, packageName }), ...args] : args;
   const result = spawnSync(command, commandArgs, {
