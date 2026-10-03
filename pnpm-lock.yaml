@@ -192,61 +192,61 @@ importers:
   .:
     dependencies:
       '@eslint/js':
-        specifier: ^10.0.1
+        specifier: 10.0.1
         version: 10.0.1(eslint@10.12.0(jiti@2.7.0))
       eslint:
-        specifier: ^10.12.0
+        specifier: 10.12.0
         version: 10.12.0(jiti@2.7.0)
       eslint-config-prettier:
-        specifier: ^10.1.8
+        specifier: 10.1.8
         version: 10.1.8(eslint@10.12.0(jiti@2.7.0))
       eslint-plugin-import:
-        specifier: ^2.32.0
+        specifier: 2.32.0
         version: 2.32.0(eslint@10.12.0(jiti@2.7.0))
       eslint-plugin-jsx-a11y:
-        specifier: ^6.10.2
+        specifier: 6.10.2
         version: 6.10.2(eslint@10.12.0(jiti@2.7.0))
       eslint-plugin-prettier:
-        specifier: ^5.5.6
+        specifier: 5.5.6
         version: 5.5.6(eslint-config-prettier@10.1.8(eslint@10.12.0(jiti@2.7.0)))(eslint@10.12.0(jiti@2.7.0))(prettier@3.9.9)
       eslint-plugin-react:
-        specifier: ^7.37.5
+        specifier: 7.37.5
         version: 7.37.5(eslint@10.12.0(jiti@2.7.0))
       eslint-plugin-react-hooks:
-        specifier: ^7.1.1
+        specifier: 7.1.1
         version: 7.1.1(eslint@10.12.0(jiti@2.7.0))
       eslint-plugin-simple-import-sort:
-        specifier: ^14.0.0
+        specifier: 14.0.0
         version: 14.0.0(eslint@10.12.0(jiti@2.7.0))
       globals:
-        specifier: ^17.13.0
+        specifier: 17.13.0
         version: 17.13.0
       jscpd:
-        specifier: ^5.4.0
+        specifier: 5.4.0
         version: 5.4.0
       knip:
-        specifier: ^6.39.0
+        specifier: 6.39.0
         version: 6.39.0
       oxfmt:
-        specifier: ^0.71.0
+        specifier: 0.71.0
         version: 0.71.0
       oxlint:
-        specifier: ^1.86.0
+        specifier: 1.86.0
         version: 1.86.0(oxlint-tsgolint@7.0.2003)
       oxlint-tailwindcss:
-        specifier: ^1.14.0
+        specifier: 1.14.0
         version: 1.14.0
       oxlint-tsgolint:
-        specifier: ^7.0.2003
+        specifier: 7.0.2003
         version: 7.0.2003
       prettier:
-        specifier: ^3.9.9
+        specifier: 3.9.9
         version: 3.9.9
       strip-json-comments:
-        specifier: ^5.0.3
+        specifier: 5.0.3
         version: 5.0.3
       typescript:
-        specifier: ^7.0.2
+        specifier: 7.0.2
         version: 7.0.2
 
 packages:
@@ -1999,10 +1999,6 @@ packages:
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
-  picomatch@4.0.5:
-    resolution: {integrity: sha512-RvwwcruNjI1ncT5xRakeyS9Lf8lcItv34KD+aif+VH9kduAyfYBipGh12274xtenIPZ119/R9BdTBa8gAwSh0A==}
-    engines: {node: '>=12'}
-
   picomatch@4.0.7:
     resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
     engines: {node: '>=12'}
@@ -3346,10 +3342,6 @@ snapshots:
     dependencies:
       walk-up-path: 4.0.0
 
-  fdir@6.5.0(picomatch@4.0.5):
-    optionalDependencies:
-      picomatch: 4.0.5
-
   fdir@6.5.0(picomatch@4.0.7):
     optionalDependencies:
       picomatch: 4.0.7
@@ -3972,8 +3964,6 @@ snapshots:
 
   picocolors@1.1.1: {}
 
-  picomatch@4.0.5: {}
-
   picomatch@4.0.7: {}
 
   possible-typed-array-names@1.1.0: {}
@@ -4184,8 +4174,8 @@ snapshots:
 
   tinyglobby@0.2.17:
     dependencies:
-      fdir: 6.5.0(picomatch@4.0.5)
-      picomatch: 4.0.5
+      fdir: 6.5.0(picomatch@4.0.7)
+      picomatch: 4.0.7
 
   tinypool@2.2.0: {}
 
