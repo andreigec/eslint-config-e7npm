@@ -13,7 +13,8 @@ permissions:
 
 jobs:
   npm:
-    runs-on: ${{ vars.CI_RUNNER || 'home-cluster' }}
+    # npm trusted publishing and provenance only accept GitHub-hosted runners.
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
