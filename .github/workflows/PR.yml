@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   PR:
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.CI_RUNNER || 'home-cluster' }}
     name: lint
     steps:
       - name: Checkout
