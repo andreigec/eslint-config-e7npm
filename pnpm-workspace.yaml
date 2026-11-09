@@ -8,3 +8,23 @@ minimumReleaseAgeExclude:
   - jscpd-linux-x64-musl@5.0.16
   - jscpd-windows-x64-msvc@5.0.16
   - jscpd@5.0.16
+catalog:
+  '@eslint/js': '10.0.1'
+  eslint: '10.14.0'
+  eslint-config-prettier: '10.1.8'
+  eslint-plugin-import: '2.32.0'
+  eslint-plugin-jsx-a11y: '6.10.2'
+  eslint-plugin-prettier: '5.5.7'
+  eslint-plugin-react: '7.37.5'
+  eslint-plugin-react-hooks: '7.1.1'
+  eslint-plugin-simple-import-sort: '14.0.0'
+  globals: '17.14.0'
+  jscpd: '5.4.2'
+  knip: '6.44.1'
+  oxfmt: '0.77.0'
+  oxlint: '1.92.0'
+  oxlint-tailwindcss: '1.17.1'
+  oxlint-tsgolint: '7.0.2006'
+  prettier: '3.9.10'
+  strip-json-comments: '5.0.3'
+  typescript: '7.0.2'
